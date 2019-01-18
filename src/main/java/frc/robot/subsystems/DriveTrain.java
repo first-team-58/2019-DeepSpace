@@ -41,7 +41,7 @@ public class DriveTrain extends Subsystem {
     m_RightFollower = new WPI_VictorSPX(3);
     m_LeftFollower = new WPI_VictorSPX(5);
     m_SpeedSolenoid = new Solenoid(1);
-
+    
     // congifure victoes to follow talons
     m_RightFollower.follow(m_FrontRightMotor);
     m_LeftFollower.follow(m_FrontLeftMotor);

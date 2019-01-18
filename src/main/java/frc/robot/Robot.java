@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.networktables.*;
 import com.kauailabs.navx.frc.AHRS;
 
 /**
@@ -29,6 +30,11 @@ public class Robot extends TimedRobot {
   public static DriveTrain m_drivetrain = new DriveTrain();
   public static OI m_oi;
   public static AHRS ahrs;
+  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+  NetworkTableEntry tx = table.getEntry("tx");
+  NetworkTableEntry ty = table.getEntry("ty");
+  NetworkTableEntry ta = table.getEntry("ta");
+
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -39,6 +45,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
+    
     //ahrs = new AHRS().Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
@@ -55,6 +62,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+   SmartDashboard.putNumber("Limelight x", tx.getDouble(0.0));
+   SmartDashboard.putNumber("Limelight y", ty.getDouble(0.0));
+   SmartDashboard.putNumber("Limelight a", ta.getDouble(0.0));
   }
 
   /**
