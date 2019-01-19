@@ -49,4 +49,6 @@ public class RobotMap {
   public static int armMotor;
   public static int armPot;
 
+  public static int elevatorMotor;
+
 }
