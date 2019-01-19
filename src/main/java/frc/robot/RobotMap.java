@@ -42,4 +42,6 @@ public class RobotMap {
   
   public static AnalogInput armPot;
 
+  public static int elevatorMotor;
+
 }
