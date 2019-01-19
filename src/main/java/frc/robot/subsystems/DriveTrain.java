@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 //import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 import frc.robot.commands.Drive;
 
 //import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -45,10 +46,10 @@ public class DriveTrain extends Subsystem {
 	public DriveTrain() {
 
 		// create motor instances
-		m_FrontLeftMotor = new WPI_VictorSPX(2);
-		m_FrontRightMotor = new WPI_VictorSPX(4);
-		m_RightFollower = new WPI_TalonSRX(3);
-		m_LeftFollower = new WPI_TalonSRX(5);
+		m_FrontLeftMotor = new WPI_VictorSPX(RobotMap.frontLeftMotor);
+		m_FrontRightMotor = new WPI_VictorSPX(RobotMap.frontRightMotor);
+		m_RightFollower = new WPI_TalonSRX(RobotMap.rightFollower);
+		m_LeftFollower = new WPI_TalonSRX(RobotMap.leftFollower);
 		//m_SpeedSolenoid = new Solenoid(1);
 
 		// congifure victoes to follow talons

@@ -8,6 +8,8 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 
@@ -28,6 +30,12 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
 
+  //Drive Motors
+  public static int frontLeftMotor = 2;
+  public static int frontRightMotor = 4;
+  public static int rightFollower = 3;
+  public static int leftFollower = 5;
+	
   //Joysticks
   public static int driver = 0;
 
@@ -38,8 +46,7 @@ public class RobotMap {
   public static int aButton = 1;
   public static int bButton = 2;
 
-  public static TalonSRX armMotor;
-  
-  public static AnalogInput armPot;
+  public static int armMotor;
+  public static int armPot;
 
 }
