@@ -7,12 +7,15 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.PIDDrive;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.networktables.*;
@@ -30,10 +33,11 @@ public class Robot extends TimedRobot {
   public static DriveTrain m_drivetrain = new DriveTrain();
   public static OI m_oi;
   public static AHRS ahrs;
-  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-  NetworkTableEntry tx = table.getEntry("tx");
-  NetworkTableEntry ty = table.getEntry("ty");
-  NetworkTableEntry ta = table.getEntry("ta");
+  public static NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+  public static NetworkTableEntry tx = table.getEntry("tx");
+  public static NetworkTableEntry ty = table.getEntry("ty");
+  public static NetworkTableEntry ta = table.getEntry("ta");
+  public static NetworkTableEntry tv = table.getEntry("tv");
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -50,6 +54,7 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    ahrs = new AHRS(SerialPort.Port.kMXP);
   }
 
   /**
@@ -65,6 +70,10 @@ public class Robot extends TimedRobot {
    SmartDashboard.putNumber("Limelight x", tx.getDouble(0.0));
    SmartDashboard.putNumber("Limelight y", ty.getDouble(0.0));
    SmartDashboard.putNumber("Limelight a", ta.getDouble(0.0));
+   SmartDashboard.putBoolean("Limelight target", tv.getBoolean(false));
+   if(Robot.m_oi.driver.getRawButton(RobotMap.aButton)) {
+	   Scheduler.getInstance().add(new PIDDrive());
+   }
   }
 
   /**

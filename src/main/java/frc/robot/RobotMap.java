@@ -7,6 +7,10 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.AnalogInput;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -31,5 +35,10 @@ public class RobotMap {
   public static int moveAxis = 1; //LY 
   public static int rotateAxis = 4; //RX
   public static int boostAxis = 3; //RTrigger
+  public static int aButton = 1;
+  
+  public static TalonSRX armMotor;
+  
+  public static AnalogInput armPot;
 
 }
