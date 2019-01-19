@@ -7,11 +7,12 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.SerialPort;
+//import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
+//import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ExampleCommand;
@@ -54,7 +55,11 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
-    ahrs = new AHRS(SerialPort.Port.kMXP);
+    ahrs = new AHRS(SPI.Port.kMXP);
+    m_drivetrain.setGyro(ahrs);
+    SmartDashboard.putNumber("P", Robot.m_drivetrain.P);
+    SmartDashboard.putNumber("I", Robot.m_drivetrain.I);
+    SmartDashboard.putNumber("D", Robot.m_drivetrain.D);
   }
 
   /**
@@ -70,9 +75,16 @@ public class Robot extends TimedRobot {
    SmartDashboard.putNumber("Limelight x", tx.getDouble(0.0));
    SmartDashboard.putNumber("Limelight y", ty.getDouble(0.0));
    SmartDashboard.putNumber("Limelight a", ta.getDouble(0.0));
-   SmartDashboard.putBoolean("Limelight target", tv.getBoolean(false));
+   SmartDashboard.putString("Limelight targets", tv.getString("0"));
+   SmartDashboard.putNumber("angle", ahrs.getAngle());
+   Robot.m_drivetrain.P = SmartDashboard.getNumber("P", 1.0);
+   Robot.m_drivetrain.I = SmartDashboard.getNumber("I", 1.0);
+   Robot.m_drivetrain.D = SmartDashboard.getNumber("D", 1.0);
    if(Robot.m_oi.driver.getRawButton(RobotMap.aButton)) {
 	   Scheduler.getInstance().add(new PIDDrive());
+   }
+   if(Robot.m_oi.driver.getRawButton(RobotMap.bButton)) {
+     Robot.m_drivetrain.positionAchieved = true;
    }
   }
 

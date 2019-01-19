@@ -5,8 +5,8 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
+//import edu.wpi.first.wpilibj.Solenoid;
+//import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.Drive;
@@ -18,7 +18,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
+//import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 /**
  * West Coast Drive for Pneumatic Wheels
@@ -26,18 +26,18 @@ import edu.wpi.first.wpilibj.interfaces.Gyro;
 public class DriveTrain extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	private WPI_TalonSRX m_FrontRightMotor;
-	private WPI_TalonSRX m_FrontLeftMotor;
-	private WPI_VictorSPX m_RightFollower;
-	private WPI_VictorSPX m_LeftFollower;
+	private WPI_VictorSPX m_FrontRightMotor;
+	private WPI_VictorSPX m_FrontLeftMotor;
+	private WPI_TalonSRX m_RightFollower;
+	private WPI_TalonSRX m_LeftFollower;
 	private DifferentialDrive m_drive;
-	private Solenoid m_SpeedSolenoid;
+	//private Solenoid m_SpeedSolenoid;
 	private AHRS gyro;
 
-	int P, I, D = 1;
+	public double P = 0.05, I = 0.01, D = 0;
 
-	int integral, previous_error;
-	public int setpoint = 0;
+	double integral, previous_error;
+	public double setpoint = 0;
 	double rcw;
 
 	public boolean positionAchieved = false;
@@ -45,18 +45,18 @@ public class DriveTrain extends Subsystem {
 	public DriveTrain() {
 
 		// create motor instances
-		m_FrontLeftMotor = new WPI_TalonSRX(2);
-		m_FrontRightMotor = new WPI_TalonSRX(4);
-		m_RightFollower = new WPI_VictorSPX(3);
-		m_LeftFollower = new WPI_VictorSPX(5);
-		m_SpeedSolenoid = new Solenoid(1);
+		m_FrontLeftMotor = new WPI_VictorSPX(2);
+		m_FrontRightMotor = new WPI_VictorSPX(4);
+		m_RightFollower = new WPI_TalonSRX(3);
+		m_LeftFollower = new WPI_TalonSRX(5);
+		//m_SpeedSolenoid = new Solenoid(1);
 
 		// congifure victoes to follow talons
 		m_RightFollower.follow(m_FrontRightMotor);
 		m_LeftFollower.follow(m_FrontLeftMotor);
 
 		// create drive object
-		m_drive = new DifferentialDrive(m_FrontRightMotor, m_FrontLeftMotor);
+		m_drive = new DifferentialDrive( m_FrontRightMotor, m_FrontLeftMotor);
 		// setGyro()
 	}
 
@@ -64,8 +64,8 @@ public class DriveTrain extends Subsystem {
 		this.gyro = gyro;
 	}
 
-	public void setSetpoint(int setpoint) {
-		this.setpoint = setpoint;
+	public void setSetpoint(double setpoint) {
+		this.setpoint = setpoint + gyro.getAngle();
 	}
 
 	public void PID() {
@@ -73,6 +73,7 @@ public class DriveTrain extends Subsystem {
 		this.integral += (error * .02);
 		double derivative = (error - this.previous_error) / .02;
 		this.rcw = P * error + I * this.integral + D * derivative;
+		if(error < 2 && previous_error < 2);
 	}
 
 	public void pidDrive(double speed) {
@@ -89,7 +90,7 @@ public class DriveTrain extends Subsystem {
 
 	@Override
 	protected void initDefaultCommand() {
-		Scheduler.getInstance().add(new Drive());
+		setDefaultCommand(new Drive());
 	}
 
 }
