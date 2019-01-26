@@ -15,10 +15,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 //import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.PIDDrive;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.*;
 import edu.wpi.first.networktables.*;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -30,8 +28,11 @@ import com.kauailabs.navx.frc.AHRS;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static ExampleSubsystem m_subsystem = new ExampleSubsystem();
   public static DriveTrain m_drivetrain = new DriveTrain();
+  public static Gripper m_Gripper = new Gripper ();
+  public static Shoulder m_Shoulder = new Shoulder();
+  public static Climber m_Climber = new Climber ();
+  public static Elevator m_Elevator = new Elevator ();
   public static OI m_oi;
   public static AHRS ahrs;
   public static NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -52,7 +53,7 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     
     //ahrs = new AHRS().Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
-    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
+    //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
     ahrs = new AHRS(SPI.Port.kMXP);

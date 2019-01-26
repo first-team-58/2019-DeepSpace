@@ -7,7 +7,7 @@
 
 package frc.robot;
 
-import frc.robot.commands.Grab;
+import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -49,16 +49,29 @@ public class OI {
   public Joystick operator = new Joystick(RobotMap.operator); 
 
 
-  // add buttons
+  // add buttons to operator
   public JoystickButton spit = new JoystickButton(operator, 1); // b button
   public JoystickButton pull = new JoystickButton(operator, 0); // a button
+  public JoystickButton high = new JoystickButton(operator, 4); // Left Bumper
+  public JoystickButton low = new JoystickButton(operator, 5); // right Bumper
+  public JoystickButton start = new JoystickButton(operator, 3); // y Button
 
-
+  // add buttons to driver
+  public JoystickButton retractF = new JoystickButton(driver, 4); // Left Bumper
+  public JoystickButton retractB = new JoystickButton(driver, 5); // Right Bumper 
+  public JoystickButton liftButton = new JoystickButton(driver, 3); // y button
 
   public OI(){
 
     spit.whileHeld(new Grab(0.5)); // not sure of speed
     pull.whileHeld(new Grab(-0.5));
+    retractF.whileHeld(new RetractFrontClimber());
+    retractB.whileHeld(new RetractBackClimber());
+    liftButton.whenPressed(new LiftRobot());
+    high.whenPressed(new PositionElevator(10000)); // need to detremine
+    low.whenPressed(new PositionElevator(0)); 
+    start.whenPressed(new PositionElevator(5000)); // need to determine 
+
   }
 
 }

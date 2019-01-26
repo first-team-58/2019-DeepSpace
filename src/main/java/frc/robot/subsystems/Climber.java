@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 
@@ -17,11 +18,13 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 public class Climber extends Subsystem {
   private WPI_TalonSRX m_ClimberFront;
   private WPI_TalonSRX m_ClimberBack;
+  public DigitalInput m_Limit;
 
   // constructor
   public Climber() {
     m_ClimberFront = new WPI_TalonSRX(RobotMap.climbMotor);
     m_ClimberBack = new WPI_TalonSRX(RobotMap.climbMotor2);
+    m_Limit = new DigitalInput(0);
   }
   
   public void runClimberUp(double moveValue){
@@ -38,8 +41,14 @@ public class Climber extends Subsystem {
     m_ClimberBack.set (moveValue);
   }
 
+  public boolean checkSwitch() {
+    return !m_Limit.get(); //false if open, true if closed
+  }
+
  @Override
   public void initDefaultCommand(){
-
+    // does not need init default
   }
+
+}
   

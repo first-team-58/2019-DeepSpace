@@ -30,6 +30,8 @@ public class RobotMap {
 
   // motor ids
   public static int gripperMotor = 7;
+  public static int climbMotor = 8;
+  public static int climbMotor2 = 9;
   
 
   // solenoid ids
