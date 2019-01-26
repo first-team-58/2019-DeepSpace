@@ -9,32 +9,37 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 
 public class Climber extends Subsystem {
-  private WPI_VictorSPX m_ClimberMotor;
-  private WPI_VictorSPX m_ClimberFollower;
+  private WPI_TalonSRX m_ClimberFront;
+  private WPI_TalonSRX m_ClimberBack;
 
   // constructor
   public Climber() {
-    m_ClimberMotor = new WPI_VictorSPX(RobotMap.climbMotor);
-    m_ClimberFollower = new WPI_VictorSPX(RobotMap.ClimbAssist);
+    m_ClimberFront = new WPI_TalonSRX(RobotMap.climbMotor);
+    m_ClimberBack = new WPI_TalonSRX(RobotMap.climbMotor2);
+  }
+  
+  public void runClimberUp(double moveValue){
+    m_ClimberFront.set (moveValue);
+    m_ClimberBack.set(moveValue);
+  }
 
-    public void runGripper(double riseValue){
-
-      m_ClimberMotor.set (riseValue);
-    }
-
-    m_ClimberFollower.follow(m_ClimberMotor);
-
+  public void runClimberFront(double moveValue){
+    m_ClimberFront.set (moveValue);
 
   }
 
-
-
-private 
+  public void runClimberBack(double moveValue){
+    m_ClimberBack.set (moveValue);
+  }
 
  @Override
-  public void Climber initDefaultCommand()
+  public void initDefaultCommand(){
+
+  }
   
