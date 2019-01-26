@@ -28,8 +28,16 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
 
+  // motor ids
+  public static int gripperMotor = 7;
+  
+
+  // solenoid ids
+  public static int hatchSolenoid = 2;
+
   //Joysticks
   public static int driver = 0;
+  public static int operator = 1;
 
   // Buttons on Driver Joystick -- needs to be fixed EBD
   public static int moveAxis = 1; //LY 

@@ -7,7 +7,9 @@
 
 package frc.robot;
 
+import frc.robot.commands.Grab;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -42,6 +44,21 @@ public class OI {
   // until it is finished as determined by it's isFinished method.
   // button.whenReleased(new ExampleCommand());
 
+  // create joysticks for driver and operator
   public Joystick driver = new Joystick(RobotMap.driver);
+  public Joystick operator = new Joystick(RobotMap.operator); 
+
+
+  // add buttons
+  public JoystickButton spit = new JoystickButton(operator, 1); // b button
+  public JoystickButton pull = new JoystickButton(operator, 0); // a button
+
+
+
+  public OI(){
+
+    spit.whileHeld(new Grab(0.5)); // not sure of speed
+    pull.whileHeld(new Grab(-0.5));
+  }
 
 }
