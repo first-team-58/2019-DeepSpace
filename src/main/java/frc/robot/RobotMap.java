@@ -32,6 +32,8 @@ public class RobotMap {
   public static int gripperMotor = 7;
   public static int climbMotor = 8;
   public static int climbMotor2 = 9;
+  public static int elevatorMotor = 6;
+  public static int ShoulderMotor = 10;
   
 
   // solenoid ids
@@ -47,11 +49,5 @@ public class RobotMap {
   public static int boostAxis = 3; //RTrigger
   public static int aButton = 1;
   public static int bButton = 2;
-
-  public static TalonSRX armMotor;
-  
-  public static AnalogInput armPot;
-
-  public static int elevatorMotor;
 
 }

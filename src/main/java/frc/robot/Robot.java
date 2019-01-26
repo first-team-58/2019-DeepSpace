@@ -33,6 +33,7 @@ public class Robot extends TimedRobot {
   public static Shoulder m_Shoulder = new Shoulder();
   public static Climber m_Climber = new Climber ();
   public static Elevator m_Elevator = new Elevator ();
+  public static Wrist m_Wrist = new Wrist ();
   public static OI m_oi;
   public static AHRS ahrs;
   public static NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
