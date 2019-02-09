@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 //import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.DriveShoulder;
 import frc.robot.commands.PIDDrive;
 import frc.robot.subsystems.*;
 import edu.wpi.first.networktables.*;
@@ -88,11 +89,18 @@ public class Robot extends TimedRobot {
    Robot.m_drivetrain.P = SmartDashboard.getNumber("P", 1.0);
    Robot.m_drivetrain.I = SmartDashboard.getNumber("I", 1.0);
    Robot.m_drivetrain.D = SmartDashboard.getNumber("D", 1.0);
+   SmartDashboard.putNumber("Shoulder angle", Robot.m_Shoulder.getAngle());
    if(Robot.m_oi.driver.getRawButton(RobotMap.aButton)) {
 	   Scheduler.getInstance().add(new PIDDrive());
    }
    if(Robot.m_oi.driver.getRawButton(RobotMap.bButton)) {
      Robot.m_drivetrain.positionAchieved = true;
+   }
+   if(Robot.m_oi.driver.getRawButton(RobotMap.xButton)) {
+	   Robot.m_Shoulder.positionAchieved = true;
+   }
+   if(Robot.m_oi.driver.getRawButton(RobotMap.yButton)) {
+	   Scheduler.getInstance().add(new DriveShoulder(SmartDashboard.getNumber("ShoulderAngle", 20))); //arbitrary number for now
    }
    //test = t.getVoltage();
    //SmartDashboard.putNumber("volts", test);

@@ -18,6 +18,7 @@ public class Shoulder extends Subsystem {
 	private double integral = 0, previous_error;
     private double pidOut = 0;
 	private double P, I, D;
+	public boolean positionAchieved = false;
     
 	public Shoulder() {
         m_armMotor = new CANSparkMax(RobotMap.ShoulderMotor, MotorType.kBrushless);
@@ -25,8 +26,8 @@ public class Shoulder extends Subsystem {
         
     }
 
-    public void setSetpoint(double setpoint) {
-		this.setpoint = setpoint;
+    public void setSetpoint(double voltage) {
+		this.setpoint = voltage;
 	}
     
     public void setPID(double p, double i, double d) {
@@ -35,7 +36,7 @@ public class Shoulder extends Subsystem {
     	D = d;
     }
     
-    private double getAngle() {
+    public double getAngle() {
     	return i_pot.getVoltage() * 72; //72 degrees per volt
     }
     
@@ -54,7 +55,7 @@ public class Shoulder extends Subsystem {
     
 	@Override
 	protected void initDefaultCommand() {
-		setDefaultCommand(new DriveShoulder());
+		//setDefaultCommand(new DriveShoulder()); //commented out while testing, dont want it to fly when we enable
 	}
 
 	public void drivePID() {

@@ -10,12 +10,13 @@ public class DriveShoulder extends Command {
 		requires(Robot.m_Shoulder);
 	}
 	
-	public DriveShoulder(double setpoint) {
-		Robot.m_Shoulder.setSetpoint(setpoint);
+	public DriveShoulder(double angle) {
+		Robot.m_Shoulder.setSetpoint(angle / 72);
 		requires(Robot.m_Shoulder);
 	}
 	
 	protected void initialize() {
+		Robot.m_Shoulder.positionAchieved = false;
 		Robot.m_Shoulder.setPID(RobotMap.shoulderP, RobotMap.shoulderI, RobotMap.shoulderD);
 	}
 
@@ -25,7 +26,7 @@ public class DriveShoulder extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return Robot.m_Shoulder.positionAchieved;
 	}
 
 }

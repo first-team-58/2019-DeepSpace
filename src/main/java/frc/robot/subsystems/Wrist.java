@@ -8,7 +8,8 @@ import frc.robot.RobotMap;
 
 public class Wrist extends Subsystem {
     private WPI_TalonSRX m_wristMotor;
-	
+	private double setpoint;
+    
 	public Wrist() {
         m_wristMotor = new WPI_TalonSRX(RobotMap.ShoulderMotor);
 
@@ -28,11 +29,16 @@ public class Wrist extends Subsystem {
     }
 
     public void setSetpoint(double setpoint) {
+    	this.setpoint = setpoint;
 		m_wristMotor.set(ControlMode.MotionMagic, setpoint );
 	}
 	@Override
 	protected void initDefaultCommand() {
 		// no command
+	}
+
+	public double getSetpoint() {
+		return setpoint;
 	}
    
 }

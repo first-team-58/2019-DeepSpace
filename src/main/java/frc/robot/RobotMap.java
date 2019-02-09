@@ -49,6 +49,8 @@ public class RobotMap {
   public static int boostAxis = 3; //RTrigger
   public static int aButton = 1;
   public static int bButton = 2;
+  public static int xButton = 3;
+  public static int yButton = 4;
 
   
   //Sensors
