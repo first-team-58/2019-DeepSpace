@@ -50,16 +50,16 @@ public class OI {
 
 
   // add buttons to operator
-  public JoystickButton spit = new JoystickButton(operator, 1); // b button
-  public JoystickButton pull = new JoystickButton(operator, 0); // a button
-  public JoystickButton high = new JoystickButton(operator, 4); // Left Bumper
-  public JoystickButton low = new JoystickButton(operator, 5); // right Bumper
-  public JoystickButton start = new JoystickButton(operator, 3); // y Button
+  public JoystickButton spit = new JoystickButton(operator, 2); // b button
+  public JoystickButton pull = new JoystickButton(operator, 1); // a button
+  public JoystickButton high = new JoystickButton(operator, 5); // Left Bumper
+  public JoystickButton low = new JoystickButton(operator, 6); // right Bumper
+  public JoystickButton start = new JoystickButton(operator, 4); // y Button
 
   // add buttons to driver
-  public JoystickButton retractF = new JoystickButton(driver, 4); // Left Bumper
-  public JoystickButton retractB = new JoystickButton(driver, 5); // Right Bumper 
-  public JoystickButton liftButton = new JoystickButton(driver, 3); // y button
+  public JoystickButton retractF = new JoystickButton(driver, 5); // Left Bumper
+  public JoystickButton retractB = new JoystickButton(driver, 6); // Right Bumper 
+  public JoystickButton liftButton = new JoystickButton(driver, 4); // y button
 
   public OI(){
 

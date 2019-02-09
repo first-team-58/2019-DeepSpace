@@ -33,7 +33,7 @@ public class RobotMap {
   public static int climbMotor = 8;
   public static int climbMotor2 = 9;
   public static int elevatorMotor = 6;
-  public static int ShoulderMotor = 10;
+  public static int ShoulderMotor = 1;
   
 
   // solenoid ids
@@ -50,4 +50,13 @@ public class RobotMap {
   public static int aButton = 1;
   public static int bButton = 2;
 
+  
+  //Sensors
+  public static int shoulderPotentiometer = 0;
+  
+  //PID values
+  public static double shoulderP = .02;
+  public static double shoulderI = 0;
+  public static double shoulderD = 0;
+  
 }

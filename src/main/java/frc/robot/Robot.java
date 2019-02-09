@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 //import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -42,6 +43,9 @@ public class Robot extends TimedRobot {
   public static NetworkTableEntry ta = table.getEntry("ta");
   public static NetworkTableEntry tv = table.getEntry("tv");
 
+  public static double test;
+  public static AnalogInput t;
+  
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -62,6 +66,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("P", Robot.m_drivetrain.P);
     SmartDashboard.putNumber("I", Robot.m_drivetrain.I);
     SmartDashboard.putNumber("D", Robot.m_drivetrain.D);
+    SmartDashboard.putNumber("volts", test);
+    //t = new AnalogInput(0);
   }
 
   /**
@@ -88,6 +94,8 @@ public class Robot extends TimedRobot {
    if(Robot.m_oi.driver.getRawButton(RobotMap.bButton)) {
      Robot.m_drivetrain.positionAchieved = true;
    }
+   //test = t.getVoltage();
+   //SmartDashboard.putNumber("volts", test);
   }
 
   /**
