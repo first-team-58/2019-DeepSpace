@@ -59,8 +59,8 @@ public class RobotMap {
 
   //Constants
   public static int elevatorTopPosition = 13902;
-  public static double elevatorCalSpeed = -.5;
-  public static double climberCalSpeed = -.5;
+  public static double elevatorCalSpeed = -.5; //1 is full speed down, -1 is full speed up
+  public static double climberCalSpeed = -.5; //1 is full speed down, -1 is full speed up
   
   //Sensors
   public static int shoulderPotentiometer = 0;

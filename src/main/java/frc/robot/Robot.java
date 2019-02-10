@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 //import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.CalibrateClimber;
 import frc.robot.commands.CalibrateElevator;
 import frc.robot.commands.DriveClimber;
 import frc.robot.commands.DriveElevator;
@@ -128,6 +129,12 @@ public class Robot extends TimedRobot {
 	   	//Robot.m_Climber.setEncodersZero();
 	   Scheduler.getInstance().add(new CalibrateElevator());
    }
+   if(Robot.m_oi.driver.getRawButton(7)) {
+	   Scheduler.getInstance().add(new CalibrateClimber());
+   }
+   if(Robot.m_oi.driver.getRawButton(8)) {
+	   Scheduler.getInstance().add(new DriveClimber(22000));
+   }
    if(Robot.m_oi.operator.getRawButton(RobotMap.aButton)) {
 	   //Scheduler.getInstance().add(new DriveWrist(200));
 	   //Robot.m_Elevator.setEncoderPosition(RobotMap.elevatorTopPosition);
@@ -163,9 +170,11 @@ public class Robot extends TimedRobot {
    if(Robot.m_oi.driver.getRawAxis(3) > .1) {
 	   Robot.m_Climber.runClimberBack(Robot.m_oi.driver.getRawAxis(3));
    }
+   /*
    if(Robot.m_oi.driver.getRawButton(RobotMap.bButton)) {
 	   Robot.m_Climber.runClimberUp(0);
    }
+   */
    SmartDashboard.putNumber("Climber front encoder", Robot.m_Climber.getFrontEncoderPosition());
    SmartDashboard.putNumber("Climber rear encoder", Robot.m_Climber.getBackEncoderPosition());
    SmartDashboard.putBoolean("Elevator limit", Robot.m_Elevator.getTopSwitch().get());
