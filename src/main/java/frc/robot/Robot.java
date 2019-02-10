@@ -16,8 +16,17 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 //import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.commands.CalibrateElevator;
+import frc.robot.commands.DriveClimber;
+import frc.robot.commands.DriveElevator;
 import frc.robot.commands.DriveShoulder;
+import frc.robot.commands.DriveWrist;
 import frc.robot.commands.PIDDrive;
+import frc.robot.commands.RocketTopHatch;
+import frc.robot.commands.UpdateClimberSetpoint;
+import frc.robot.commands.UpdateElevatorSetpoint;
+import frc.robot.commands.UpdateShoulderSetpoint;
+import frc.robot.commands.UpdateWristSetpoint;
 import frc.robot.subsystems.*;
 import edu.wpi.first.networktables.*;
 import com.kauailabs.navx.frc.AHRS;
@@ -43,9 +52,10 @@ public class Robot extends TimedRobot {
   public static NetworkTableEntry ty = table.getEntry("ty");
   public static NetworkTableEntry ta = table.getEntry("ta");
   public static NetworkTableEntry tv = table.getEntry("tv");
-
+  AnalogInput test2 = new AnalogInput(1);
   public static double test;
   public static AnalogInput t;
+  public static double testangle = 20;
   
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -68,6 +78,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("I", Robot.m_drivetrain.I);
     SmartDashboard.putNumber("D", Robot.m_drivetrain.D);
     SmartDashboard.putNumber("volts", test);
+    SmartDashboard.putNumber("angle setpoint", testangle);
     //t = new AnalogInput(0);
   }
 
@@ -90,20 +101,74 @@ public class Robot extends TimedRobot {
    Robot.m_drivetrain.I = SmartDashboard.getNumber("I", 1.0);
    Robot.m_drivetrain.D = SmartDashboard.getNumber("D", 1.0);
    SmartDashboard.putNumber("Shoulder angle", Robot.m_Shoulder.getAngle());
+   SmartDashboard.putNumber("Setpoint Shoulder", Robot.m_Shoulder.getSetpointAngle());
+   SmartDashboard.putNumber("Wrist angle", Robot.m_Wrist.getAngleDegrees());
+   SmartDashboard.putNumber("Wrist angle2", Robot.m_Wrist.getAngleRaw());
+
+   if(Math.abs(Robot.m_oi.operator.getRawAxis(5)) > .2) {
+     double newangle = Robot.m_Shoulder.getSetpointAngle() + Robot.m_oi.operator.getRawAxis(5);
+     double newvoltage = newangle / 72;
+    Scheduler.getInstance().add(new UpdateShoulderSetpoint(SmartDashboard.getNumber("ShoulderAngle", newvoltage)));
+   }
    if(Robot.m_oi.driver.getRawButton(RobotMap.aButton)) {
-	   Scheduler.getInstance().add(new PIDDrive());
+	   //Scheduler.getInstance().add(new PIDDrive());
    }
    if(Robot.m_oi.driver.getRawButton(RobotMap.bButton)) {
-     Robot.m_drivetrain.positionAchieved = true;
+     //Robot.m_drivetrain.positionAchieved = true;
    }
-   if(Robot.m_oi.driver.getRawButton(RobotMap.xButton)) {
+   if(Robot.m_oi.operator.getRawButton(RobotMap.yButton)) {
 	   Robot.m_Shoulder.positionAchieved = true;
    }
-   if(Robot.m_oi.driver.getRawButton(RobotMap.yButton)) {
-	   Scheduler.getInstance().add(new DriveShoulder(SmartDashboard.getNumber("ShoulderAngle", 20))); //arbitrary number for now
+   if(Robot.m_oi.operator.getRawButton(RobotMap.xButton)) {
+    // Scheduler.getInstance().add(new UpdateShoulderSetpoint(SmartDashboard.getNumber("ShoulderAngle", testangle)));
+	   //Scheduler.getInstance().add(new DriveShoulder(SmartDashboard.getNumber("ShoulderAngle", testangle))); //arbitrary number for now
    }
-   //test = t.getVoltage();
-   //SmartDashboard.putNumber("volts", test);
+   if(Robot.m_oi.operator.getRawButton(8)) {
+     	  // Scheduler.getInstance().add(new DriveShoulder(SmartDashboard.getNumber("ShoulderAngle", testangle))); //arbitrary number for now
+	   	//Robot.m_Climber.setEncodersZero();
+	   Scheduler.getInstance().add(new CalibrateElevator());
+   }
+   if(Robot.m_oi.operator.getRawButton(RobotMap.aButton)) {
+	   //Scheduler.getInstance().add(new DriveWrist(200));
+	   //Robot.m_Elevator.setEncoderPosition(RobotMap.elevatorTopPosition);
+	   //Scheduler.getInstance().add(new DriveElevator(8000));
+	   //Scheduler.getInstance().add(new DriveClimber(25000));
+      //Robot.m_Elevator.drive(.25);
+	   Scheduler.getInstance().add(new RocketTopHatch());
+    }
+   if(Robot.m_oi.operator.getRawButton(RobotMap.bButton)) {
+	   //Scheduler.getInstance().add(new UpdateWristSetpoint(100));
+	   //Scheduler.getInstance().add(new UpdateElevatorSetpoint(5000));
+	   //Scheduler.getInstance().add(new CalibrateElevator());
+	  // Scheduler.getInstance().add(new UpdateClimberSetpoint(100));
+    //Robot.m_Elevator.drive(-.25);
+  }
+   if(Robot.m_oi.operator.getRawButton(5)) {
+	   if(Math.abs(Robot.m_oi.operator.getRawAxis(1)) > .2) {
+		   //Robot.m_Shoulder.drive(Robot.m_oi.operator.getRawAxis(1));
+		   SmartDashboard.putNumber("Controller output", Robot.m_oi.operator.getRawAxis(1));
+		   //Robot.m_Wrist.drive(Robot.m_oi.operator.getRawAxis(1));
+		   Robot.m_Elevator.drive(Robot.m_oi.operator.getRawAxis(1));
+		   //Robot.m_Climber.runClimberUp(Robot.m_oi.operator.getRawAxis(1));
+	   } else {
+		   //Robot.m_Shoulder.drive(0);
+		   //Robot.m_Wrist.drive(0);
+		   Robot.m_Elevator.drive(0);
+		   //Robot.m_Climber.runClimberUp(0);
+	   }
+   }
+   if(Robot.m_oi.driver.getRawAxis(2) > .1) {
+	   Robot.m_Climber.runClimberFront(Robot.m_oi.driver.getRawAxis(2));
+   }
+   if(Robot.m_oi.driver.getRawAxis(3) > .1) {
+	   Robot.m_Climber.runClimberBack(Robot.m_oi.driver.getRawAxis(3));
+   }
+   if(Robot.m_oi.driver.getRawButton(RobotMap.bButton)) {
+	   Robot.m_Climber.runClimberUp(0);
+   }
+   SmartDashboard.putNumber("Climber front encoder", Robot.m_Climber.getFrontEncoderPosition());
+   SmartDashboard.putNumber("Climber rear encoder", Robot.m_Climber.getBackEncoderPosition());
+   SmartDashboard.putBoolean("Elevator limit", Robot.m_Elevator.getTopSwitch().get());
   }
 
   /**
@@ -113,6 +178,20 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    Robot.m_Shoulder.drive(0);
+    Robot.m_Wrist.drive(0);
+    Robot.m_Shoulder.integral = 0;
+    Robot.m_Wrist.integral = 0;
+    Robot.m_Shoulder.previous_error = 0;
+    Robot.m_Wrist.previous_error = 0;
+    Robot.m_Elevator.drive(0);
+    Robot.m_Elevator.integral = 0;
+    Robot.m_Elevator.previous_error = 0;
+    Robot.m_Climber.runClimberUp(0);
+    Robot.m_Climber.integralf = 0;
+    Robot.m_Climber.integralr = 0;
+    Robot.m_Climber.previous_errorf = 0;
+    Robot.m_Climber.previous_errorr = 0;
   }
 
   @Override

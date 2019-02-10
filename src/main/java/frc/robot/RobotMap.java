@@ -30,12 +30,17 @@ public class RobotMap {
 
   // motor ids
   public static int gripperMotor = 7;
-  public static int climbMotor = 8;
-  public static int climbMotor2 = 9;
+  public static int climbMotorRear = 8;
+  public static int climbMotorFront = 9;
   public static int elevatorMotor = 6;
-  public static int ShoulderMotor = 1;
+  public static int ShoulderMotor = 11;
+  public static int wristMotor = 10;
   
-
+  //limit ids
+  public static int elevatorTopSwitch = 9;
+  public static int climberFSwitch = 0;
+  public static int climberBSwitch = 1;
+  
   // solenoid ids
   public static int hatchSolenoid = 2;
 
@@ -52,13 +57,74 @@ public class RobotMap {
   public static int xButton = 3;
   public static int yButton = 4;
 
+  //Constants
+  public static int elevatorTopPosition = 13902;
+  public static double elevatorCalSpeed = -.5;
+  public static double climberCalSpeed = -.5;
   
   //Sensors
   public static int shoulderPotentiometer = 0;
   
+  //Angle limits
+  public static double wristPositiveLimit = 300; //max angle for wrist
+  public static double wristNegitiveLimit = 30; //min angle for wrist
+  public static double shoulderPositiveLimit = 20; //highest angle for shoulder
+  public static double shoulderNegitiveLimit = 230; //lowest angle for shoulder
+  
   //PID values
-  public static double shoulderP = .02;
-  public static double shoulderI = 0;
+  public static double shoulderP = .12;
+  public static double shoulderI = .01;
   public static double shoulderD = 0;
+  public static double wristP = .3;
+  public static double wristI = .02;
+  public static double wristD = 0;
+  public static double elevatorP = .000071;
+  public static double elevatorI = .0001;
+  public static double elevatorD = 0;
+  public static double climberPf = .0007;
+  public static double climberIf = 0.0001;
+  public static double climberDf = 0;
+  public static double climberPr = .0007;
+  public static double climberIr = 0.0001;
+  public static double climberDr = 0;
+  
+  
+  //PID Deadzones
+  public static int elevatorPositionDeadzone = 250; //double (math is absolute value, so abs(setpoint-pos) < this value)
+  public static double shoulderPositionDeadzone = 7.5; //(math is absolute value, so abs(setpoint-pos) < this value)
+  public static double wristPositionDeadzone = 7.5; //(math is absolute value, so abs(setpoint-pos) < this value)
+  
+  //Positions
+  public static int rocketBallTopElevatorHeight = 14000; //top
+  public static double rocketBallTopShoulderAngle = 60;
+  public static double rocketBallTopWristAngle = 20; //should be 5, but thats too low for the pot
+  
+  public static int rocketBallMidElevatorHeight = 14000;
+  public static double rocketBallMidShoulderAngle = 263;
+  public static double rocketBallMidWristAngle = 55;
+
+  public static int rocketBallLowElevatorHeight = 12677;
+  public static double rocketBallLowShoulderAngle = 282;
+  public static double rocketBallLowWristAngle = 90;
+
+  public static int rocketHatchTopElevatorHeight = 14000;
+  public static double rocketHatchTopShoulderAngle = 104;
+  public static double rocketHatchTopWristAngle = 63;
+  
+  public static int rocketHatchMidElevatorHeight = 14000;
+  public static double rocketHatchMidShoulderAngle = 234;
+  public static double rocketHatchMidWristAngle = 140;
+  
+  public static int rocketHatchLowElevatorHeight = 7000;
+  public static double rocketHatchLowShoulderAngle = 282;
+  public static double rocketHatchLowWristAngle = 140;
+  
+  public static int ballFromFloorElevatorHeight = 2800;
+  public static double ballFromFloorShoulderAngle = 351;
+  public static double ballFromFloorWristAngle = 47;
+  
+  public static int hatchFromFloorElevatorHeight = 0;
+  public static double hatchFromFloorShoulderAngle = 351;
+  public static double hatchFromFloorWristAngle = 80;
   
 }

@@ -24,7 +24,7 @@ public class LiftRobot extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.m_Climber.checkSwitch();
+    return false;//Robot.m_Climber.checkSwitch();
   }
 
   // Called once after isFinished returns true

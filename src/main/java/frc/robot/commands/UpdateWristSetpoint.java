@@ -4,15 +4,15 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class UpdateShoulderSetpoint extends Command {
+public class UpdateWristSetpoint extends Command {
 	private double setpoint;
 	
-	public UpdateShoulderSetpoint(double newSetpoint) {
+	public UpdateWristSetpoint(double newSetpoint) {
 		this.setpoint = newSetpoint;
 	}
 	
 	protected void initialize() {
-		Robot.m_Shoulder.setSetpointAngle(setpoint);
+		Robot.m_Wrist.setSetpointAngle(setpoint);
 	}
 
 	protected void execute() {
@@ -21,9 +21,10 @@ public class UpdateShoulderSetpoint extends Command {
 
 	@Override
 	protected boolean isFinished() {
-		if(Math.abs(setpoint-Robot.m_Shoulder.getAngle()) < RobotMap.shoulderPositionDeadzone) {
-			System.out.println("Shoulder at position: " + (setpoint - Robot.m_Shoulder.getAngle()));
+		if(Math.abs(setpoint-Robot.m_Wrist.getAngleDegrees()) < RobotMap.wristPositionDeadzone) {
+			System.out.println("Wrist at position: " + (setpoint - Robot.m_Wrist.getAngleDegrees()));
 			return true;
+
 		} else {
 			return false;
 		}

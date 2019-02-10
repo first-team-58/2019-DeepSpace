@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class PositionElevator extends Command {
-  private double height;
+  private int height;
 
 
-  public PositionElevator(double height) {
+  public PositionElevator(int height) {
     requires(Robot.m_Elevator);
     this.height = height;
   }

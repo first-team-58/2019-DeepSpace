@@ -50,8 +50,8 @@ public class OI {
 
 
   // add buttons to operator
-  public JoystickButton spit = new JoystickButton(operator, 2); // b button
-  public JoystickButton pull = new JoystickButton(operator, 1); // a button
+  public JoystickButton spit = new JoystickButton(driver, RobotMap.yButton); // b button
+  public JoystickButton pull = new JoystickButton(driver, RobotMap.xButton); // a button
   public JoystickButton high = new JoystickButton(operator, 5); // Left Bumper
   public JoystickButton low = new JoystickButton(operator, 6); // right Bumper
   public JoystickButton start = new JoystickButton(operator, 4); // y Button
@@ -59,15 +59,15 @@ public class OI {
   // add buttons to driver
   public JoystickButton retractF = new JoystickButton(driver, 5); // Left Bumper
   public JoystickButton retractB = new JoystickButton(driver, 6); // Right Bumper 
-  public JoystickButton liftButton = new JoystickButton(driver, 4); // y button
+  //public JoystickButton liftButton = new JoystickButton(driver, 4); // y button
 
   public OI(){
 
-    spit.whileHeld(new Grab(0.5)); // not sure of speed
-    pull.whileHeld(new Grab(-0.5));
+    spit.whileHeld(new Grab(1)); // not sure of speed
+    pull.whileHeld(new Grab(-1));
     retractF.whileHeld(new RetractFrontClimber());
     retractB.whileHeld(new RetractBackClimber());
-    liftButton.whenPressed(new LiftRobot());
+    //liftButton.whenPressed(new LiftRobot());
     high.whenPressed(new PositionElevator(10000)); // need to detremine
     low.whenPressed(new PositionElevator(0)); 
     start.whenPressed(new PositionElevator(5000)); // need to determine 
