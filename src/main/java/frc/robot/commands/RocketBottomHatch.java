@@ -4,16 +4,18 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class RocketTopHatch extends CommandGroup {
-	public RocketTopHatch() {
+public class RocketBottomHatch extends CommandGroup {
+	public RocketBottomHatch() {
 		addParallel(new StartPID());
 		if (Robot.m_Shoulder.getAngle() > 200) {
 			System.out.println("going to safe point");
 			addSequential(new UpdateShoulderSetpoint(200)); // clear it from collisions
 		}
 		
-		addSequential(new UpdateElevatorSetpoint(RobotMap.rocketHatchTopElevatorHeight));
-		addSequential(new UpdateWristSetpoint(RobotMap.rocketHatchTopWristAngle));
-		addSequential(new UpdateShoulderSetpoint(RobotMap.rocketHatchTopShoulderAngle));
+		addSequential(new UpdateElevatorSetpoint(RobotMap.rocketHatchLowElevatorHeight));
+		addSequential(new UpdateWristSetpoint(RobotMap.rocketHatchLowWristAngle));
+		addSequential(new UpdateShoulderSetpoint(RobotMap.rocketHatchLowShoulderAngle));
 	}
+
+
 }

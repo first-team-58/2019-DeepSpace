@@ -50,28 +50,30 @@ public class OI {
 
 
   // add buttons to operator
-  public JoystickButton spit = new JoystickButton(driver, RobotMap.yButton); // b button
-  public JoystickButton pull = new JoystickButton(driver, RobotMap.xButton); // a button
-  public JoystickButton high = new JoystickButton(operator, 5); // Left Bumper
-  public JoystickButton low = new JoystickButton(operator, 6); // right Bumper
-  public JoystickButton start = new JoystickButton(operator, 4); // y Button
+
+  public JoystickButton wrist = new JoystickButton(operator, RobotMap.xButton); // Left Bumper
+  public JoystickButton shoulder = new JoystickButton(operator, RobotMap.aButton); // right Bumper
+  public JoystickButton elevator = new JoystickButton(operator, RobotMap.bButton); // y Button
 
   // add buttons to driver
-  public JoystickButton retractF = new JoystickButton(driver, 5); // Left Bumper
-  public JoystickButton retractB = new JoystickButton(driver, 6); // Right Bumper 
+  public JoystickButton spit = new JoystickButton(driver, RobotMap.yButton); // b button
+  public JoystickButton pull = new JoystickButton(driver, RobotMap.xButton); // a button
+  public JoystickButton retractF = new JoystickButton(driver, RobotMap.lBumper); // Left Bumper
+  public JoystickButton retractB = new JoystickButton(driver, RobotMap.rBumper); // Right Bumper 
+  public JoystickButton calibrateClimber = new JoystickButton(driver, RobotMap.selectButton);
+  public JoystickButton climb = new JoystickButton(driver, RobotMap.startButton);
   //public JoystickButton liftButton = new JoystickButton(driver, 4); // y button
 
   public OI(){
-
+	calibrateClimber.whenPressed(new CalibrateClimber());
+	climb.whenPressed(new DriveClimber(RobotMap.climberTarget));
     spit.whileHeld(new Grab(1)); // not sure of speed
     pull.whileHeld(new Grab(-1));
     retractF.whileHeld(new RetractFrontClimber());
     retractB.whileHeld(new RetractBackClimber());
-    //liftButton.whenPressed(new LiftRobot());
-    high.whenPressed(new PositionElevator(10000)); // need to detremine
-    low.whenPressed(new PositionElevator(0)); 
-    start.whenPressed(new PositionElevator(5000)); // need to determine 
-
+    wrist.whileHeld(new UpdateWristSetpoint(Robot.m_Wrist.getSetpointAngle() + 1*operator.getRawAxis(RobotMap.verticalLeft)));
+    shoulder.whileHeld(new UpdateShoulderSetpoint(Robot.m_Shoulder.getSetpointAngle() + 1*operator.getRawAxis(RobotMap.verticalLeft)));
+    elevator.whileHeld(new UpdateElevatorSetpoint((int) (Robot.m_Elevator.getSetpoint() + ((int) 10*operator.getRawAxis(RobotMap.verticalLeft)))));
   }
-
+  
 }

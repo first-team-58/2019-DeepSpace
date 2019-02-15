@@ -52,10 +52,19 @@ public class RobotMap {
   public static int moveAxis = 1; //LY 
   public static int rotateAxis = 4; //RX
   public static int boostAxis = 3; //RTrigger
+  
+  //Xbox button values
+  public static int verticalLeft = 1; //vertical axis of left joystick
+  public static int horizontalLeft = 2; //horizontal axis of left joystick
+  public static int horizontalRight = 4; //horizontal axis of right joystick
   public static int aButton = 1;
   public static int bButton = 2;
   public static int xButton = 3;
   public static int yButton = 4;
+  public static int lBumper = 5;
+  public static int rBumper = 6;
+  public static int selectButton = 7;
+  public static int startButton = 8;
 
   //Constants
   public static int elevatorTopPosition = 13902;
@@ -126,5 +135,7 @@ public class RobotMap {
   public static int hatchFromFloorElevatorHeight = 0;
   public static double hatchFromFloorShoulderAngle = 351;
   public static double hatchFromFloorWristAngle = 80;
+  
+  public static int climberTarget = 22000;
   
 }
