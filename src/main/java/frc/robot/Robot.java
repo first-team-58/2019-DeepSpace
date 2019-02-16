@@ -23,6 +23,9 @@ import frc.robot.commands.DriveClimber;
 import frc.robot.commands.DriveElevator;
 import frc.robot.commands.DriveShoulder;
 import frc.robot.commands.DriveWrist;
+import frc.robot.commands.ManualDriveElevator;
+import frc.robot.commands.ManualDriveShoulder;
+import frc.robot.commands.ManualDriveWrist;
 import frc.robot.commands.PIDDrive;
 import frc.robot.commands.PositionPicker;
 import frc.robot.commands.RocketTopHatch;
@@ -44,7 +47,8 @@ import com.kauailabs.navx.frc.AHRS;
  * creating this project, you must also update the build.gradle file in the
  * project.
  */
-public class Robot extends TimedRobot {
+	public class Robot extends TimedRobot {
+  public static boolean manualMode = false;
   public static DriveTrain m_drivetrain = new DriveTrain();
   public static Gripper m_Gripper = new Gripper ();
   public static Shoulder m_Shoulder = new Shoulder();
@@ -189,6 +193,24 @@ public class Robot extends TimedRobot {
 	   Robot.m_Climber.runClimberUp(0);
    }
    */
+   if(Robot.m_oi.operator.getRawButton(RobotMap.aButton) && manualMode) {
+	   Scheduler.getInstance().add(new ManualDriveShoulder(Robot.m_oi.operator.getRawAxis(RobotMap.verticalLeft)));
+   } else if(manualMode) {
+	   Scheduler.getInstance().add(new ManualDriveShoulder(0));
+   }
+
+   if(Robot.m_oi.operator.getRawButton(RobotMap.bButton) && manualMode) {
+	   Scheduler.getInstance().add(new ManualDriveElevator(Robot.m_oi.operator.getRawAxis(RobotMap.verticalLeft)));
+   } else if(manualMode) {
+	   Scheduler.getInstance().add(new ManualDriveElevator(0));
+   }
+   
+   if(Robot.m_oi.operator.getRawButton(RobotMap.xButton) && manualMode) {
+	   Scheduler.getInstance().add(new ManualDriveWrist(Robot.m_oi.operator.getRawAxis(RobotMap.verticalLeft)));
+   } else if(manualMode) {
+	   Scheduler.getInstance().add(new ManualDriveWrist(0));
+   }
+   /*
    if(m_oi.operator.getPOV() == 0) {//up on pov hat
 	   if(cmdTBLY == 3) {
 		   System.out.println("At top of command table, can't go up any more");
@@ -224,6 +246,7 @@ public class Robot extends TimedRobot {
 	   }
 	   Scheduler.getInstance().add(new PositionPicker(cmdTBLX, cmdTBLY));
    }
+   */
    
    SmartDashboard.putNumber("Climber front encoder", Robot.m_Climber.getFrontEncoderPosition());
    SmartDashboard.putNumber("Climber rear encoder", Robot.m_Climber.getBackEncoderPosition());
