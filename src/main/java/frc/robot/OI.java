@@ -10,6 +10,7 @@ package frc.robot;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Button;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -46,8 +47,7 @@ public class OI {
 
   // create joysticks for driver and operator
   public Joystick driver = new Joystick(RobotMap.driver);
-  public Joystick operator = new Joystick(RobotMap.operator); 
-
+  public Joystick operator = new Joystick(RobotMap.operator);
 
   // add buttons to operator
 
@@ -59,21 +59,60 @@ public class OI {
   public JoystickButton spit = new JoystickButton(driver, RobotMap.yButton); // b button
   public JoystickButton pull = new JoystickButton(driver, RobotMap.xButton); // a button
   public JoystickButton retractF = new JoystickButton(driver, RobotMap.lBumper); // Left Bumper
-  public JoystickButton retractB = new JoystickButton(driver, RobotMap.rBumper); // Right Bumper 
+  public JoystickButton retractB = new JoystickButton(driver, RobotMap.rBumper); // Right Bumper
   public JoystickButton calibrateClimber = new JoystickButton(driver, RobotMap.selectButton);
   public JoystickButton climb = new JoystickButton(driver, RobotMap.startButton);
-  //public JoystickButton liftButton = new JoystickButton(driver, 4); // y button
+  // public JoystickButton liftButton = new JoystickButton(driver, 4); // y button
 
-  public OI(){
-	calibrateClimber.whenPressed(new CalibrateClimber());
-	climb.whenPressed(new DriveClimber(RobotMap.climberTarget));
+  public OI() {
+    calibrateClimber.whenPressed(new CalibrateClimber());
+    climb.whenPressed(new DriveClimber(RobotMap.climberTarget));
     spit.whileHeld(new Grab(1)); // not sure of speed
     pull.whileHeld(new Grab(-1));
     retractF.whileHeld(new RetractFrontClimber());
     retractB.whileHeld(new RetractBackClimber());
-    wrist.whileHeld(new UpdateWristSetpoint(Robot.m_Wrist.getSetpointAngle() + 1*operator.getRawAxis(RobotMap.verticalLeft)));
-    shoulder.whileHeld(new UpdateShoulderSetpoint(Robot.m_Shoulder.getSetpointAngle() + 1*operator.getRawAxis(RobotMap.verticalLeft)));
-    elevator.whileHeld(new UpdateElevatorSetpoint((int) (Robot.m_Elevator.getSetpoint() + ((int) 10*operator.getRawAxis(RobotMap.verticalLeft)))));
+    wrist.whileHeld(
+        new UpdateWristSetpoint(Robot.m_Wrist.getSetpointAngle() + 1 * operator.getRawAxis(RobotMap.verticalLeft)));
+    shoulder.whileHeld(new UpdateShoulderSetpoint(
+        Robot.m_Shoulder.getSetpointAngle() + 1 * operator.getRawAxis(RobotMap.verticalLeft)));
+    elevator.whileHeld(new UpdateElevatorSetpoint(
+        (int) (Robot.m_Elevator.getSetpoint() + ((int) 10 * operator.getRawAxis(RobotMap.verticalLeft)))));
   }
-  
+
+  enum direction {
+    UP, DOWN
+  }
+
+  public class joystickAnalogButton extends Button {
+    private Joystick stick;
+    private int axis;
+    private direction dir;
+    private double deadzone = 0.2;
+
+    joystickAnalogButton(Joystick joy, int axis, direction dir) {
+      this.stick = joy;
+      this.axis = axis;
+      this.dir = dir;
+    }
+
+    public boolean get() {
+      switch (dir) {
+      case UP:
+        if (stick.getRawAxis(axis) > deadzone) {
+          return true;
+        } else {
+          return false;
+        }
+      case DOWN:
+        deadzone = deadzone * -1;
+        if (stick.getRawAxis(axis) < deadzone) {
+          return true;
+        } else {
+          return false;
+        }
+      default:
+        return false;
+      }
+    }
+  }
 }

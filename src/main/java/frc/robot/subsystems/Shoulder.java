@@ -29,7 +29,7 @@ public class Shoulder extends Subsystem {
     }
 
     public void setSetpoint(double voltage) {
-		this.setpoint = voltage;
+        this.setpoint = voltage;
 	}
     
     public void setSetpointAngle(double angle) {
