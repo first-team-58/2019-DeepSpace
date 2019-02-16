@@ -83,7 +83,17 @@ public class DriveTrain extends Subsystem {
 
 	// manual drive the robot
 	public void drive(double moveValue, double rotateValue) {
-
+		if(moveValue > .5) {
+			moveValue = .5;
+		} else if(moveValue < -.5) {
+			moveValue = -.5;
+		}
+		
+		if(rotateValue > .5) {
+			rotateValue = .5;
+		} else if(rotateValue < -.5) {
+			rotateValue = -.5;
+		}
 		m_drive.arcadeDrive(moveValue, rotateValue);
 
 	}

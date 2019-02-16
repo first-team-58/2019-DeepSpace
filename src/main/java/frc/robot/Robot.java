@@ -24,6 +24,7 @@ import frc.robot.commands.DriveElevator;
 import frc.robot.commands.DriveShoulder;
 import frc.robot.commands.DriveWrist;
 import frc.robot.commands.PIDDrive;
+import frc.robot.commands.PositionPicker;
 import frc.robot.commands.RocketTopHatch;
 import frc.robot.commands.UpdateClimberSetpoint;
 import frc.robot.commands.UpdateElevatorSetpoint;
@@ -194,6 +195,7 @@ public class Robot extends TimedRobot {
 	   } else {
 		   cmdTBLY++;
 	   }
+	   Scheduler.getInstance().add(new PositionPicker(cmdTBLX, cmdTBLY));
    }
    
    if(m_oi.operator.getPOV() == 90) {//right on pov hat, change to ball
@@ -202,6 +204,7 @@ public class Robot extends TimedRobot {
 	   } else {
 		   cmdTBLX++;
 	   }
+	   Scheduler.getInstance().add(new PositionPicker(cmdTBLX, cmdTBLY));
    }
    
    if(m_oi.operator.getPOV() == 180) {//down on pov hat
@@ -210,6 +213,7 @@ public class Robot extends TimedRobot {
 	   } else {
 		   cmdTBLY--;
 	   }
+	   Scheduler.getInstance().add(new PositionPicker(cmdTBLX, cmdTBLY));
    }
    
    if(m_oi.operator.getPOV() == 270) {//left on pov hat, change to hatch
@@ -218,6 +222,7 @@ public class Robot extends TimedRobot {
 	   } else {
 		   cmdTBLX--;
 	   }
+	   Scheduler.getInstance().add(new PositionPicker(cmdTBLX, cmdTBLY));
    }
    
    SmartDashboard.putNumber("Climber front encoder", Robot.m_Climber.getFrontEncoderPosition());
