@@ -45,9 +45,9 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 
-  // create joysticks for driver and operator
-  public Joystick driver = new Joystick(RobotMap.driver);
-  public Joystick operator = new Joystick(RobotMap.operator);
+	// create joysticks for driver and operator
+	public Joystick driver = new Joystick(RobotMap.driver);
+	public Joystick operator = new Joystick(RobotMap.operator);
 
 	// add buttons to operator
 
@@ -59,7 +59,7 @@ public class OI {
 	public JoystickPOVButton setpointDown = new JoystickPOVButton(operator, POV.SOUTH);
 	public JoystickPOVButton setpointLeft = new JoystickPOVButton(operator, POV.WEST);
 	public JoystickPOVButton setpointRight = new JoystickPOVButton(operator, POV.EAST);
-	
+
 	// add buttons to driver
 	public JoystickButton spit = new JoystickButton(driver, RobotMap.yButton); // b button
 	public JoystickButton pull = new JoystickButton(driver, RobotMap.xButton); // a button
@@ -87,6 +87,41 @@ public class OI {
 				Robot.m_Shoulder.getSetpointAngle() + 1 * operator.getRawAxis(RobotMap.verticalLeft)));
 		elevator.whileHeld(new UpdateElevatorSetpoint(
 				(int) (Robot.m_Elevator.getSetpoint() + ((int) 10 * operator.getRawAxis(RobotMap.verticalLeft)))));
+	}
+
+	public class joystickAnalogButton extends Button {
+
+		private Joystick stick;
+		private int axis;
+		private direction dir;
+		private double deadzone = 0.2;
+
+		joystickAnalogButton(Joystick joy, int axis, direction dir) {
+			this.stick = joy;
+			this.axis = axis;
+			this.dir = dir;
+
+		}
+
+		public boolean get() {
+			switch (dir) {
+			case UP:
+				if (stick.getRawAxis(axis) > deadzone) {
+					return true;
+				} else {
+					return false;
+				}
+			case DOWN:
+				deadzone = deadzone * -1;
+				if (stick.getRawAxis(axis) < deadzone) {
+					return true;
+				} else {
+					return false;
+				}
+			default:
+				return false;
+			}
+		}
 	}
 
 	class JoystickPOVButton extends Button {
@@ -139,41 +174,8 @@ public class OI {
 	enum POV {
 		NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTWEST, WEST, NORTHWEST
 	}
-  enum direction {
-    UP, DOWN
-  }
 
-  public class joystickAnalogButton extends Button {
-
-    private Joystick stick;
-    private int axis;
-    private direction dir;
-    private double deadzone = 0.2;
-
-    joystickAnalogButton(Joystick joy, int axis, direction dir) {
-      this.stick = joy;
-      this.axis = axis;
-      this.dir = dir;
-
-    }
-    public boolean get() {
-      switch (dir) {
-      case UP:
-        if (stick.getRawAxis(axis) > deadzone) {
-          return true;
-          return false;
-        } else {
-        }
-      case DOWN:
-        deadzone = deadzone * -1;
-        if (stick.getRawAxis(axis) < deadzone) {
-          return true;
-        } else {
-          return false;
-        }
-      default:
-        return false;
-      }
-    }
-  }
+	enum direction {
+		UP, DOWN
+	}
 }
