@@ -7,6 +7,7 @@ import frc.robot.Robot;
 public class ModifyCommandTable extends Command {
 
 	public ModifyCommandTable(int xmod, int ymod) {
+		System.out.println("xmod: " + xmod + " ymod: " + ymod);
 		if(xmod != 0) {
 			if(xmod > 0) {
 				   if(Robot.cmdTBLY == 1) {
