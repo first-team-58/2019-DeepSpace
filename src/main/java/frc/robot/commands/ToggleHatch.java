@@ -5,11 +5,10 @@ import frc.robot.Robot;
 
 public class ToggleHatch extends Command {
   
-    private boolean toggle;
+    private static boolean toggle;
 
   public ToggleHatch() {
-    requires(Robot.m_Gripper);
-    
+    //requires(Robot.m_Gripper);
   }
 
   // Called just before this Command runs the first time

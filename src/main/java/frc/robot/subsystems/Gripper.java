@@ -21,6 +21,7 @@ public class Gripper extends Subsystem {
     public Gripper () {
         m_GripperWheel = new WPI_VictorSPX(RobotMap.gripperMotor);
         hatchReleaseSolenoid = new Solenoid(RobotMap.hatchSolenoid);
+        hatchReleaseSolenoid.set(false);
     }
 
     public void setHatch(boolean setting){
@@ -33,6 +34,6 @@ public class Gripper extends Subsystem {
 
     @Override
     public void initDefaultCommand() {
-        setDefaultCommand(new ToggleHatch()); // just runs hatch release
+
     }
 }

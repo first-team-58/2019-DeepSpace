@@ -69,9 +69,11 @@ public class OI {
 	public JoystickButton calibrateClimber = new JoystickButton(driver, RobotMap.selectButton);
 	public JoystickButton climb = new JoystickButton(driver, RobotMap.startButton);
 	// public JoystickButton liftButton = new JoystickButton(driver, 4); // y button
-	public JoystickButton hatch = new JoystickButton(driver, RobotMap.xButton);
+	public JoystickButton hatch = new JoystickButton(driver, RobotMap.xButton); //x
+	public JoystickButton autoAim = new JoystickButton(driver, 10);
 
 	public OI() {
+		autoAim.whenPressed(new PIDDrive());
 		hatch.whenPressed(new ToggleHatch());
 		calElevator.whenPressed(new CalibrateElevator());
 		setpointUp.whenPressed(new ModifyCommandTable(0, 1));

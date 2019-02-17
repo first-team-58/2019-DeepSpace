@@ -96,7 +96,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("volts", test);
 		SmartDashboard.putNumber("angle setpoint", testangle);
 		// t = new AnalogInput(0);
-		opcon = new XboxController(m_oi.operator.getPort());
+		//opcon = new XboxController(m_oi.operator.getPort());
+		pushTable();
+		initReadTable();
 	}
 
 	/**
