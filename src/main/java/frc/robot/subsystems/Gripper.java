@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.Solenoid;
-import frc.robot.commands.ReleaseHatch;
+import frc.robot.commands.ToggleHatch;
 
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
@@ -33,6 +33,6 @@ public class Gripper extends Subsystem {
 
     @Override
     public void initDefaultCommand() {
-        setDefaultCommand(new ReleaseHatch()); // just runs hatch release
+        setDefaultCommand(new ToggleHatch()); // just runs hatch release
     }
 }

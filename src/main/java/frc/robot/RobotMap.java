@@ -42,7 +42,7 @@ public class RobotMap {
   public static int climberBSwitch = 1;
   
   // solenoid ids
-  public static int hatchSolenoid = 2;
+  public static int hatchSolenoid = 0;
 
   //Joysticks
   public static int driver = 0;
@@ -70,6 +70,7 @@ public class RobotMap {
   public static int elevatorTopPosition = 13902;
   public static double elevatorCalSpeed = -.5; //1 is full speed down, -1 is full speed up
   public static double climberCalSpeed = -.5; //1 is full speed down, -1 is full speed up
+  public static double maxDriveSpeed = .70;
   
   //Sensors
   public static int shoulderPotentiometer = 0;
@@ -136,6 +137,6 @@ public class RobotMap {
   public static double hatchFromFloorShoulderAngle = 351;
   public static double hatchFromFloorWristAngle = 80;
   
-  public static int climberTarget = 22000;
+  public static int climberTarget = 24000;
   
 }

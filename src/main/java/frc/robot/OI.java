@@ -59,17 +59,21 @@ public class OI {
 	public JoystickPOVButton setpointDown = new JoystickPOVButton(operator, POV.SOUTH);
 	public JoystickPOVButton setpointLeft = new JoystickPOVButton(operator, POV.WEST);
 	public JoystickPOVButton setpointRight = new JoystickPOVButton(operator, POV.EAST);
+	public JoystickButton calElevator = new JoystickButton(operator, RobotMap.startButton);
 
 	// add buttons to driver
-	public JoystickButton spit = new JoystickButton(driver, RobotMap.yButton); // b button
-	public JoystickButton pull = new JoystickButton(driver, RobotMap.xButton); // a button
+	public JoystickButton spit = new JoystickButton(driver, RobotMap.bButton); // b button
+	public JoystickButton pull = new JoystickButton(driver, RobotMap.aButton); // a button
 	public JoystickButton retractF = new JoystickButton(driver, RobotMap.lBumper); // Left Bumper
 	public JoystickButton retractB = new JoystickButton(driver, RobotMap.rBumper); // Right Bumper
 	public JoystickButton calibrateClimber = new JoystickButton(driver, RobotMap.selectButton);
 	public JoystickButton climb = new JoystickButton(driver, RobotMap.startButton);
 	// public JoystickButton liftButton = new JoystickButton(driver, 4); // y button
+	public JoystickButton hatch = new JoystickButton(driver, RobotMap.xButton);
 
 	public OI() {
+		hatch.whenPressed(new ToggleHatch());
+		calElevator.whenPressed(new CalibrateElevator());
 		setpointUp.whenPressed(new ModifyCommandTable(0, 1));
 		setpointDown.whenPressed(new ModifyCommandTable(0, -1));
 		setpointLeft.whenPressed(new ModifyCommandTable(-1, 0));

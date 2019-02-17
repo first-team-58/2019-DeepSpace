@@ -3,11 +3,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ReleaseHatch extends Command {
+public class ToggleHatch extends Command {
   
-    private boolean releaseActivate;
+    private boolean toggle;
 
-  public ReleaseHatch() {
+  public ToggleHatch() {
     requires(Robot.m_Gripper);
     
   }
@@ -15,21 +15,14 @@ public class ReleaseHatch extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    
+	toggle = !toggle;
+    Robot.m_Gripper.setHatch(toggle);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    releaseActivate = false;
 
-    double releaseValue = Robot.m_oi.operator.getRawAxis(2); //left trigger
-
-    if (releaseValue > 0.75) {
-        releaseActivate = true;
-    }
-
-    Robot.m_Gripper.setHatch(releaseActivate);
   }
 
   // Make this return true when this Command no longer needs to run execute()

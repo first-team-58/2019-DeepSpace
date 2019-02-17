@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 //import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.RobotMap;
 import frc.robot.commands.Drive;
 
 //import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -83,16 +84,16 @@ public class DriveTrain extends Subsystem {
 
 	// manual drive the robot
 	public void drive(double moveValue, double rotateValue) {
-		if(moveValue > .5) {
-			moveValue = .5;
-		} else if(moveValue < -.5) {
-			moveValue = -.5;
+		if(moveValue > RobotMap.maxDriveSpeed) {
+			moveValue = RobotMap.maxDriveSpeed;
+		} else if(moveValue < -RobotMap.maxDriveSpeed) {
+			moveValue = -RobotMap.maxDriveSpeed;
 		}
 		
-		if(rotateValue > .5) {
-			rotateValue = .5;
-		} else if(rotateValue < -.5) {
-			rotateValue = -.5;
+		if(rotateValue > RobotMap.maxDriveSpeed) {
+			rotateValue = RobotMap.maxDriveSpeed;
+		} else if(rotateValue < -RobotMap.maxDriveSpeed) {
+			rotateValue = -RobotMap.maxDriveSpeed;
 		}
 		m_drive.arcadeDrive(moveValue, rotateValue);
 

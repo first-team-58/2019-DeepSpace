@@ -86,7 +86,7 @@ public double getSetpointAngle() {
         	maxamp = m_armMotor.getOutputCurrent();
         }
         SmartDashboard.putNumber("Shoulder amperage", maxamp);
-    	SmartDashboard.putNumber("Shoulder drive value", Double.valueOf(String.format("%.5f", v2)));
+    	SmartDashboard.putNumber("Shoulder speed", Double.valueOf(String.format("%.5f", v2)));
     }
     
 	@Override
@@ -97,6 +97,7 @@ public double getSetpointAngle() {
 	public void drivePID() {
 		PID();
 		drive(pidOut);
+		SmartDashboard.putNumber("Shoulder pidOut", pidOut);
 	}
 
 	public double getSetpoint() {

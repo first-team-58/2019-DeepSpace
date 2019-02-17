@@ -17,30 +17,11 @@ public class Wrist extends Subsystem {
 	
 	public Wrist() {
         m_wristMotor = new WPI_TalonSRX(RobotMap.wristMotor);
-        /*
-        // add potentiometer as analog input
-        m_wristMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog);
-        //m_wristMotor.setInverted(true);        
-        
-        m_wristMotor.selectProfileSlot(0, 0);
-        m_wristMotor.config_kP(0, 2);
-        m_wristMotor.config_kI(0, 0);
-        m_wristMotor.config_kD(0, 1);
-        //m_wristMotor.config_kF(0, 2);
-        m_wristMotor.configAllowableClosedloopError(0, 500, 10);
-
-        // motion magic
-        m_wristMotor.configMotionCruiseVelocity(10000); // probably very wrong
-        m_wristMotor.configMotionAcceleration(3000); // probably super duper wrong
-        */
-        
     }
 
     public void setSetpoint(double voltage) {
     	this.setpoint = voltage;
     	SmartDashboard.putNumber("Wrist setpoint", this.setpoint);
-    	
-		//m_wristMotor.set(ControlMode.MotionMagic, setpoint );
 	}
     
     public void setSetpointAngle(double angle) {
@@ -84,14 +65,12 @@ public class Wrist extends Subsystem {
     		m_wristMotor.set(v2);
     	
     	}
-    	SmartDashboard.putNumber("Wrist drive value", Double.valueOf(String.format("%.4f", v2)));
+    	SmartDashboard.putNumber("Wrist speed", Double.valueOf(String.format("%.4f", v2)));
     }
     
     public void drivePID() {
     	PID();
-    	SmartDashboard.putNumber("Wrist setpoint", setpoint);
-    	SmartDashboard.putNumber("Wrist setpoint angle", getSetpointAngle());
-    	SmartDashboard.putNumber("Wrist PID out", pidOut);
+    	SmartDashboard.putNumber("Wrist pidOut", pidOut);
     	drive(pidOut);
     }
     
