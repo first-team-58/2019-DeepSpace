@@ -12,7 +12,9 @@ public class UpdateShoulderSetpoint extends Command {
 	}
 	
 	protected void initialize() {
+		System.out.println("changing setpoint from: " + Robot.m_Shoulder.getAngle() + " to " + setpoint);
 		Robot.m_Shoulder.setSetpointAngle(setpoint);
+		System.out.println("setpoint changed to: " + Robot.m_Shoulder.getSetpointAngle());
 	}
 
 	protected void execute() {

@@ -5,8 +5,18 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.Robot;
 
 public class ModifyCommandTable extends Command {
-
+	int xmod, ymod;
+	
 	public ModifyCommandTable(int xmod, int ymod) {
+		this.xmod = xmod;
+		this.ymod = ymod;
+	}
+	
+	protected void initialize() {
+		
+	}
+	
+	protected void execute() {
 		System.out.println("xmod: " + xmod + " ymod: " + ymod);
 		if(xmod != 0) {
 			if(xmod > 0) {

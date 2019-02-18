@@ -8,8 +8,10 @@
 package frc.robot;
 
 import frc.robot.commands.*;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.buttons.Button;
 
 /**
@@ -72,7 +74,11 @@ public class OI {
 	public JoystickButton hatch = new JoystickButton(driver, RobotMap.xButton); //x
 	public JoystickButton autoAim = new JoystickButton(driver, 10);
 
+	//limit switches autoset position
+	public DigitalInputButton elevatorSwitch = new DigitalInputButton(Robot.m_Elevator.getTopSwitch(), true);
+	
 	public OI() {
+		elevatorSwitch.whenActive(new SetElevatorPosition());
 		autoAim.whenPressed(new PIDDrive());
 		hatch.whenPressed(new ToggleHatch());
 		calElevator.whenPressed(new CalibrateElevator());
@@ -87,12 +93,12 @@ public class OI {
 		pull.whileHeld(new Grab(-1));
 		retractF.whileHeld(new RetractFrontClimber());
 		retractB.whileHeld(new RetractBackClimber());
-		wrist.whileHeld(new UpdateWristSetpoint(
-				Robot.m_Wrist.getSetpointAngle() + 1 * operator.getRawAxis(RobotMap.verticalLeft)));
-		shoulder.whileHeld(new UpdateShoulderSetpoint(
-				Robot.m_Shoulder.getSetpointAngle() + 1 * operator.getRawAxis(RobotMap.verticalLeft)));
-		elevator.whileHeld(new UpdateElevatorSetpoint(
-				(int) (Robot.m_Elevator.getSetpoint() + ((int) 10 * operator.getRawAxis(RobotMap.verticalLeft)))));
+		//wrist.whileHeld(new UpdateWristSetpoint(
+			//	Robot.m_Wrist.getSetpointAngle() + 10 * operator.getRawAxis(RobotMap.verticalLeft)));
+		//shoulder.whileHeld(new UpdateShoulderSetpoint(
+			//	Robot.m_Shoulder.getSetpointAngle() + 10 * operator.getRawAxis(RobotMap.verticalLeft)));
+		//elevator.whileHeld(new UpdateElevatorSetpoint(
+			//	(int) (Robot.m_Elevator.getSetpoint() + ((int) 10 * operator.getRawAxis(RobotMap.verticalLeft)))));
 	}
 
 	public class joystickAnalogButton extends Button {
@@ -130,6 +136,18 @@ public class OI {
 		}
 	}
 
+	class DigitalInputButton extends Trigger {
+		private DigitalInput t;
+		private boolean invert;
+		public DigitalInputButton(DigitalInput t, boolean invert) {
+			this.t = t;
+			this.invert = !invert;
+		}
+		public boolean get() {
+			return t.get() == invert;
+		}
+	}
+	
 	class JoystickPOVButton extends Button {
 		Joystick stick;
 		int dir;

@@ -29,6 +29,7 @@ import frc.robot.commands.ManualDriveWrist;
 import frc.robot.commands.PIDDrive;
 import frc.robot.commands.PositionPicker;
 import frc.robot.commands.RocketTopHatch;
+import frc.robot.commands.StartPID;
 import frc.robot.commands.UpdateClimberSetpoint;
 import frc.robot.commands.UpdateElevatorSetpoint;
 import frc.robot.commands.UpdateShoulderSetpoint;
@@ -96,7 +97,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("volts", test);
 		SmartDashboard.putNumber("angle setpoint", testangle);
 		// t = new AnalogInput(0);
-		//opcon = new XboxController(m_oi.operator.getPort());
+		// opcon = new XboxController(m_oi.operator.getPort());
 		pushTable();
 		initReadTable();
 	}
@@ -154,6 +155,21 @@ public class Robot extends TimedRobot {
 			Scheduler.getInstance().add(new ManualDriveWrist(Robot.m_oi.operator.getRawAxis(RobotMap.verticalLeft)));
 		} else if (manualMode) {
 			Scheduler.getInstance().add(new ManualDriveWrist(0));
+		}
+
+		if (Robot.m_oi.operator.getRawButton(RobotMap.xButton)) {
+			Scheduler.getInstance().add(new UpdateWristSetpoint(
+					Robot.m_Wrist.getSetpointAngle() + 2 * Robot.m_oi.operator.getRawAxis(RobotMap.verticalLeft)));
+		}
+
+		if (Robot.m_oi.operator.getRawButton(RobotMap.aButton)) {
+			Scheduler.getInstance().add(new UpdateShoulderSetpoint(
+					Robot.m_Shoulder.getSetpointAngle() + 2 * Robot.m_oi.operator.getRawAxis(RobotMap.verticalLeft)));
+		}
+
+		if (Robot.m_oi.operator.getRawButton(RobotMap.bButton)) {
+			Scheduler.getInstance().add(new UpdateElevatorSetpoint(
+					(int) (Robot.m_Elevator.getSetpoint() + ((int) -100 * Robot.m_oi.operator.getRawAxis(RobotMap.verticalLeft)))));
 		}
 
 		SmartDashboard.putNumber("Climber front encoder", Robot.m_Climber.getFrontEncoderPosition());
@@ -235,6 +251,7 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+		Scheduler.getInstance().add(new StartPID());
 	}
 
 	/**
@@ -269,7 +286,7 @@ public class Robot extends TimedRobot {
 		addTableEntry("Climber Front I", RobotMap.climberIf);
 		addTableEntry("Climber Front D", RobotMap.climberDf);
 		addTableEntry("Climber Rear P", RobotMap.climberPr);
-		addTableEntry("Climber Rear I",RobotMap.climberIr);
+		addTableEntry("Climber Rear I", RobotMap.climberIr);
 		addTableEntry("Climber Rear D", RobotMap.climberDr);
 		addTableEntry("Wrist positive limit", RobotMap.wristPositiveLimit);
 		addTableEntry("Wrist negitive limit", RobotMap.wristNegitiveLimit);
@@ -322,12 +339,12 @@ public class Robot extends TimedRobot {
 
 	public void addTableEntry(String key, Number value) {
 		NetworkTableEntry tmp = adjustables.getEntry(key);
-		if(!tmp.exists()) {
+		if (!tmp.exists()) {
 			tmp.setNumber(value);
 		}
 		tmp.setPersistent();
 	}
-	
+
 	public void initReadTable() {
 		adjustables.addEntryListener(new TableEntryListener() {
 			@Override

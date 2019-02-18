@@ -21,7 +21,7 @@ public class Wrist extends Subsystem {
 
     public void setSetpoint(double voltage) {
     	this.setpoint = voltage;
-    	SmartDashboard.putNumber("Wrist setpoint", this.setpoint);
+    	//SmartDashboard.putNumber("Wrist setpoint", this.setpoint);
 	}
     
     public void setSetpointAngle(double angle) {
@@ -71,7 +71,7 @@ public class Wrist extends Subsystem {
     public void drivePID() {
     	PID();
     	SmartDashboard.putNumber("Wrist pidOut", pidOut);
-    	drive(pidOut);
+    	drive(-pidOut);
     }
     
 	@Override
