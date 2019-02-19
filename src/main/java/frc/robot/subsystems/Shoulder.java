@@ -25,9 +25,16 @@ public class Shoulder extends Subsystem {
 	public Shoulder() {
         m_armMotor = new CANSparkMax(RobotMap.ShoulderMotor, MotorType.kBrushless);
         i_pot = new AnalogInput(RobotMap.shoulderPotentiometer);
-        
     }
 
+	public void resetSetpoint() {
+		
+	}
+	
+	public long getAccumulator() {
+		return i_pot.getAccumulatorValue();
+	}
+	
     public void setSetpoint(double voltage) {
         this.setpoint = voltage;
 	}
@@ -64,9 +71,9 @@ public double getSetpointAngle() {
     
     public void drive(double value) {
         double v2;
-        if(value > .5) {
+        if(value > .2) {
             //m_armMotor.set(.5);
-            v2 = -.5;
+            v2 = -.2;
         } else if(value < -.5) {
             //m_armMotor.set(-.5);
             v2 = .5;

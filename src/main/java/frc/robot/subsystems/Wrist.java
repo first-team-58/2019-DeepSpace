@@ -59,8 +59,8 @@ public class Wrist extends Subsystem {
     		v2 = value;
     	}
     	//positive v2 = counterclockwise (From right side)
-    	if(v2 < 0 && getAngleDegrees() > RobotMap.wristPositiveLimit) { //wrist rotating counterclocksise | will not turn ccw when angle > 300
-    	} else if (v2 > 0 && getAngleDegrees() < RobotMap.wristNegitiveLimit) { //wrist rotating clockwise | will not turn cw when angle < 50
+    	if(v2 > 0 && getAngleDegrees() > RobotMap.wristPositiveLimit) { //wrist rotating counterclocksise | will not turn ccw when angle > 300
+    	} else if (v2 < 0 && getAngleDegrees() < RobotMap.wristNegitiveLimit) { //wrist rotating clockwise | will not turn cw when angle < 50
     	} else {
     		m_wristMotor.set(v2);
     	
@@ -93,6 +93,10 @@ public class Wrist extends Subsystem {
 	
 	public double getSetpoint() {
 		return setpoint;
+	}
+	
+	public void setPotZero() {
+		m_wristMotor.getSensorCollection().setAnalogPosition(RobotMap.wristZero, 0);
 	}
    
 }

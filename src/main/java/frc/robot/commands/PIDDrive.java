@@ -24,6 +24,10 @@ public class PIDDrive extends Command {
 		}
 	}
 
+	protected void end() {
+		toggle = false;
+	}
+	
 	@Override
 	protected boolean isFinished() {
 		return toggle;

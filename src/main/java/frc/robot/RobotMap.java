@@ -82,13 +82,13 @@ public class RobotMap {
   public static double shoulderNegitiveLimit = 230; //lowest angle for shoulder
   
   //PID values
-  public static double shoulderP = .12;
-  public static double shoulderI = .01;
+  public static double shoulderP = .5;
+  public static double shoulderI = .05;
   public static double shoulderD = 0;
-  public static double wristP = .3;
-  public static double wristI = .02;
+  public static double wristP = 4;
+  public static double wristI = .1;
   public static double wristD = 0;
-  public static double elevatorP = .000071;
+  public static double elevatorP = .00071;
   public static double elevatorI = .0001;
   public static double elevatorD = 0;
   public static double climberPf = .0007;
@@ -106,37 +106,39 @@ public class RobotMap {
   
   //Positions
   public static int rocketBallTopElevatorHeight = 14000; //top
-  public static double rocketBallTopShoulderAngle = 60;
-  public static double rocketBallTopWristAngle = 20; //should be 5, but thats too low for the pot
+  public static double rocketBallTopShoulderAngle = 74;
+  public static double rocketBallTopWristAngle = 88; //should be 5, but thats too low for the pot
   
-  public static int rocketBallMidElevatorHeight = 14000;
-  public static double rocketBallMidShoulderAngle = 263;
-  public static double rocketBallMidWristAngle = 55;
+  public static int rocketBallMidElevatorHeight = 10500;
+  public static double rocketBallMidShoulderAngle = 104;
+  public static double rocketBallMidWristAngle = 86;
 
-  public static int rocketBallLowElevatorHeight = 12677;
-  public static double rocketBallLowShoulderAngle = 282;
-  public static double rocketBallLowWristAngle = 90;
+  public static int rocketBallLowElevatorHeight = 3000;
+  public static double rocketBallLowShoulderAngle = 137;
+  public static double rocketBallLowWristAngle = 123;
 
   public static int rocketHatchTopElevatorHeight = 14000;
-  public static double rocketHatchTopShoulderAngle = 104;
-  public static double rocketHatchTopWristAngle = 63;
+  public static double rocketHatchTopShoulderAngle = 80;
+  public static double rocketHatchTopWristAngle = 142;
   
-  public static int rocketHatchMidElevatorHeight = 14000;
-  public static double rocketHatchMidShoulderAngle = 234;
-  public static double rocketHatchMidWristAngle = 140;
+  public static int rocketHatchMidElevatorHeight = 2500;
+  public static double rocketHatchMidShoulderAngle = 102;
+  public static double rocketHatchMidWristAngle = 173;
   
-  public static int rocketHatchLowElevatorHeight = 7000;
-  public static double rocketHatchLowShoulderAngle = 282;
-  public static double rocketHatchLowWristAngle = 140;
+  public static int rocketHatchLowElevatorHeight = 1500;
+  public static double rocketHatchLowShoulderAngle = 167;
+  public static double rocketHatchLowWristAngle = 230;
   
-  public static int ballFromFloorElevatorHeight = 2800;
-  public static double ballFromFloorShoulderAngle = 351;
-  public static double ballFromFloorWristAngle = 47;
+  public static int ballFromFloorElevatorHeight = 3000;
+  public static double ballFromFloorShoulderAngle = 157;
+  public static double ballFromFloorWristAngle = 73;
   
-  public static int hatchFromFloorElevatorHeight = 0;
-  public static double hatchFromFloorShoulderAngle = 351;
-  public static double hatchFromFloorWristAngle = 80;
+  public static int hatchFromFloorElevatorHeight = 1500;
+  public static double hatchFromFloorShoulderAngle = 177;
+  public static double hatchFromFloorWristAngle = 154;
   
   public static int climberTarget = 24000;
   
+  public static long shoulderZero = 0;
+  public static int wristZero = 0;
 }

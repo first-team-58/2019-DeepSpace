@@ -8,6 +8,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoMode.PixelFormat;
+import edu.wpi.first.cameraserver.*;
 //import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -83,7 +86,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-
+		
+		UsbCamera cam = CameraServer.getInstance().startAutomaticCapture(0);
+		UsbCamera cam2 = CameraServer.getInstance().startAutomaticCapture(1);
 		// ahrs = new AHRS().Port.kMXP); /* Alternatives: SPI.Port.kMXP, I2C.Port.kMXP
 		// or SerialPort.Port.kUSB */
 		// m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
@@ -113,14 +118,14 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotPeriodic() {
-		SmartDashboard.putNumber("Limelight x", tx.getDouble(0.0));
-		SmartDashboard.putNumber("Limelight y", ty.getDouble(0.0));
+		//SmartDashboard.putNumber("Limelight x", tx.getDouble(0.0));
+		//SmartDashboard.putNumber("Limelight y", ty.getDouble(0.0));
 		SmartDashboard.putNumber("Limelight a", ta.getDouble(0.0));
-		SmartDashboard.putString("Limelight targets", tv.getString("0"));
+		//SmartDashboard.putString("Limelight targets", tv.getString("0"));
 		SmartDashboard.putNumber("angle", ahrs.getAngle());
-		Robot.m_drivetrain.P = SmartDashboard.getNumber("P", 1.0);
-		Robot.m_drivetrain.I = SmartDashboard.getNumber("I", 1.0);
-		Robot.m_drivetrain.D = SmartDashboard.getNumber("D", 1.0);
+		//Robot.m_drivetrain.P = SmartDashboard.getNumber("P", 1.0);
+		//Robot.m_drivetrain.I = SmartDashboard.getNumber("I", 1.0);
+		//Robot.m_drivetrain.D = SmartDashboard.getNumber("D", 1.0);
 
 		SmartDashboard.putNumber("Shoulder angle", Robot.m_Shoulder.getAngle());
 		SmartDashboard.putNumber("Shoulder setpoint", Robot.m_Shoulder.getSetpointAngle());
@@ -168,13 +173,13 @@ public class Robot extends TimedRobot {
 		}
 
 		if (Robot.m_oi.operator.getRawButton(RobotMap.bButton)) {
-			Scheduler.getInstance().add(new UpdateElevatorSetpoint(
-					(int) (Robot.m_Elevator.getSetpoint() + ((int) -100 * Robot.m_oi.operator.getRawAxis(RobotMap.verticalLeft)))));
+			Scheduler.getInstance().add(new UpdateElevatorSetpoint((int) (Robot.m_Elevator.getSetpoint()
+					+ ((int) -100 * Robot.m_oi.operator.getRawAxis(RobotMap.verticalLeft)))));
 		}
-
+		
+		SmartDashboard.putNumber("Wrist Potentiometer", Robot.m_Wrist.getAngleDegrees());
 		SmartDashboard.putNumber("Climber front encoder", Robot.m_Climber.getFrontEncoderPosition());
 		SmartDashboard.putNumber("Climber rear encoder", Robot.m_Climber.getBackEncoderPosition());
-		SmartDashboard.putBoolean("Elevator limit", Robot.m_Elevator.getTopSwitch().get());
 	}
 
 	/**
@@ -335,6 +340,8 @@ public class Robot extends TimedRobot {
 		addTableEntry("Climber Height Target", RobotMap.climberTarget);
 
 		addTableEntry("Drive Max Speed", RobotMap.maxDriveSpeed);
+		addTableEntry("Wrist Zero", RobotMap.wristZero);
+		addTableEntry("Shoulder Zero", RobotMap.shoulderZero);
 	}
 
 	public void addTableEntry(String key, Number value) {
@@ -351,6 +358,12 @@ public class Robot extends TimedRobot {
 			public void valueChanged(NetworkTable table, String key, NetworkTableEntry entry, NetworkTableValue value,
 					int flags) {
 				switch (key) {
+				case ("Wrist Zero"):
+					RobotMap.wristZero = (int) value.getDouble();
+					break;
+				case ("Shoulder Zero"):
+					RobotMap.shoulderZero = (long) value.getDouble();
+					break;
 				case ("Shoulder P"):
 					RobotMap.shoulderP = value.getDouble();
 					break;
