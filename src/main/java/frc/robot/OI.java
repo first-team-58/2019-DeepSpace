@@ -89,10 +89,10 @@ public class OI {
 		manual.whenPressed(new TogglePID());
 		calibrateClimber.whenPressed(new CalibrateClimber());
 		climb.whenPressed(new DriveClimber(RobotMap.climberTarget));
-		spit.whileHeld(new Grab(1)); // not sure of speed
+		spit.whileHeld(new Grab(.5)); // not sure of speed
 		//spit.toggleWhenPressed(new Grab(1));
 		//pull.whileHeld(new Grab(-1));
-		pull.toggleWhenPressed(new Grab(-1));
+		pull.toggleWhenPressed(new Grab(-.5));
 		retractF.whileHeld(new RetractFrontClimber());
 		retractB.whileHeld(new RetractBackClimber());
 		//wrist.whileHeld(new UpdateWristSetpoint(
