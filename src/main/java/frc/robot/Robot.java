@@ -86,7 +86,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		
+
 		UsbCamera cam = CameraServer.getInstance().startAutomaticCapture(0);
 		UsbCamera cam2 = CameraServer.getInstance().startAutomaticCapture(1);
 		// ahrs = new AHRS().Port.kMXP); /* Alternatives: SPI.Port.kMXP, I2C.Port.kMXP
@@ -118,21 +118,21 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotPeriodic() {
-		//SmartDashboard.putNumber("Limelight x", tx.getDouble(0.0));
-		//SmartDashboard.putNumber("Limelight y", ty.getDouble(0.0));
+		// SmartDashboard.putNumber("Limelight x", tx.getDouble(0.0));
+		// SmartDashboard.putNumber("Limelight y", ty.getDouble(0.0));
 		SmartDashboard.putNumber("Limelight a", ta.getDouble(0.0));
-		//SmartDashboard.putString("Limelight targets", tv.getString("0"));
+		// SmartDashboard.putString("Limelight targets", tv.getString("0"));
 		SmartDashboard.putNumber("angle", ahrs.getAngle());
-		//Robot.m_drivetrain.P = SmartDashboard.getNumber("P", 1.0);
-		//Robot.m_drivetrain.I = SmartDashboard.getNumber("I", 1.0);
-		//Robot.m_drivetrain.D = SmartDashboard.getNumber("D", 1.0);
+		// Robot.m_drivetrain.P = SmartDashboard.getNumber("P", 1.0);
+		// Robot.m_drivetrain.I = SmartDashboard.getNumber("I", 1.0);
+		// Robot.m_drivetrain.D = SmartDashboard.getNumber("D", 1.0);
 
 		SmartDashboard.putNumber("Shoulder angle", Robot.m_Shoulder.getAngle());
 		SmartDashboard.putNumber("Shoulder setpoint", Robot.m_Shoulder.getSetpointAngle());
 
 		SmartDashboard.putNumber("Wrist angle", Robot.m_Wrist.getAngleDegrees());
 		SmartDashboard.putNumber("Wrist setpoint", Robot.m_Wrist.getSetpointAngle());
-	
+
 		SmartDashboard.putNumber("Elevator height", Robot.m_Elevator.getEncoderPosition());
 		SmartDashboard.putNumber("Elevator setpoint", Robot.m_Elevator.getSetpoint());
 
@@ -176,7 +176,7 @@ public class Robot extends TimedRobot {
 			Scheduler.getInstance().add(new UpdateElevatorSetpoint((int) (Robot.m_Elevator.getSetpoint()
 					+ ((int) -100 * Robot.m_oi.operator.getRawAxis(RobotMap.verticalLeft)))));
 		}
-		
+
 		SmartDashboard.putNumber("Wrist Potentiometer", Robot.m_Wrist.getAngleDegrees());
 		SmartDashboard.putNumber("Climber front encoder", Robot.m_Climber.getFrontEncoderPosition());
 		SmartDashboard.putNumber("Climber rear encoder", Robot.m_Climber.getBackEncoderPosition());
@@ -265,7 +265,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putBoolean("Elevator Limit", m_Elevator.getTopSwitch().get());//put elevator limit switch on DB
+		SmartDashboard.putBoolean("Elevator Limit", m_Elevator.getTopSwitch().get());// put elevator limit switch on DB
 	}
 
 	/**
@@ -343,6 +343,10 @@ public class Robot extends TimedRobot {
 		addTableEntry("Drive Max Speed", RobotMap.maxDriveSpeed);
 		addTableEntry("Wrist Zero", RobotMap.wristZero);
 		addTableEntry("Shoulder Zero", RobotMap.shoulderZero);
+
+		addTableEntry("Shoulder Safe Point", RobotMap.shoulderSafePoint);
+		addTableEntry("Wrist Safe Point", RobotMap.wristSafePoint);
+		addTableEntry("Elevator Safe Point", RobotMap.elevatorSafePoint);
 	}
 
 	public void addTableEntry(String key, Number value) {
@@ -526,6 +530,15 @@ public class Robot extends TimedRobot {
 					break;
 				case ("Drive Max Speed"):
 					RobotMap.maxDriveSpeed = value.getDouble();
+					break;
+				case ("Shoulder Safe Point"):
+					RobotMap.shoulderSafePoint = value.getDouble();
+					break;
+				case ("Wrist Safe Point"):
+					RobotMap.wristSafePoint = value.getDouble();
+					break;
+				case ("Elevator Safe Point"):
+					RobotMap.elevatorSafePoint = (int) value.getDouble();
 					break;
 				}
 			}

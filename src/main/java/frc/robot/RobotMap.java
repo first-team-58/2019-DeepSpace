@@ -115,6 +115,10 @@ public class RobotMap {
   public static double climberIr = 0.0001;
   public static double climberDr = 0;
   
+  //Position safepoints when pid is moving
+  public static double shoulderSafePoint = 150;
+  public static double wristSafePoint = 50; //??? idk what is safe
+  public static int elevatorSafePoint = 10000;
   
   //PID Deadzones
   public static int elevatorPositionDeadzone = 500; //was 250 chnaged to 500 to try to make it more consistant, double (math is absolute value, so abs(setpoint-pos) < this value)

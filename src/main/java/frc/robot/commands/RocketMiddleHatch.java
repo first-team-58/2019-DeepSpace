@@ -8,9 +8,9 @@ import frc.robot.RobotMap;
 public class RocketMiddleHatch extends CommandGroup {
 	public RocketMiddleHatch() {
 		addParallel(new StartPID());
-		if (Robot.m_Shoulder.getAngle() > 200) {
+		if (Robot.m_Shoulder.getAngle() > RobotMap.shoulderSafePoint) {
 			System.out.println("going to safe point");
-			addSequential(new UpdateShoulderSetpoint(200)); // clear it from collisions
+			addSequential(new UpdateShoulderSetpoint(RobotMap.shoulderSafePoint)); // clear it from collisions
 		}
 		
 		addSequential(new UpdateElevatorSetpoint(RobotMap.rocketHatchMidElevatorHeight));
