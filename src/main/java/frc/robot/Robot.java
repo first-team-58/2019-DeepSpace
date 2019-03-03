@@ -93,14 +93,14 @@ public class Robot extends TimedRobot {
 		// or SerialPort.Port.kUSB */
 		// m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
 		// chooser.addOption("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", m_chooser);
+		//SmartDashboard.putData("Auto mode", m_chooser);
 		ahrs = new AHRS(SPI.Port.kMXP);
 		m_drivetrain.setGyro(ahrs);
 		SmartDashboard.putNumber("P", Robot.m_drivetrain.P);
 		SmartDashboard.putNumber("I", Robot.m_drivetrain.I);
 		SmartDashboard.putNumber("D", Robot.m_drivetrain.D);
-		SmartDashboard.putNumber("volts", test);
-		SmartDashboard.putNumber("angle setpoint", testangle);
+		//SmartDashboard.putNumber("volts", test);
+		//SmartDashboard.putNumber("angle setpoint", testangle);
 		// t = new AnalogInput(0);
 		// opcon = new XboxController(m_oi.operator.getPort());
 		pushTable();
@@ -137,13 +137,15 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Elevator setpoint", Robot.m_Elevator.getSetpoint());
 
 		// IDK how to do this in OI properly yet
+		/*
 		if (Robot.m_oi.driver.getRawAxis(2) > .1) {
 			Robot.m_Climber.runClimberFront(Robot.m_oi.driver.getRawAxis(2));
 		}
 		if (Robot.m_oi.driver.getRawAxis(3) > .1) {
 			Robot.m_Climber.runClimberBack(Robot.m_oi.driver.getRawAxis(3));
 		}
-
+		 */
+		/*
 		if (Robot.m_oi.operator.getRawButton(RobotMap.aButton) && manualMode) {
 			Scheduler.getInstance().add(new ManualDriveShoulder(Robot.m_oi.operator.getRawAxis(RobotMap.verticalLeft)));
 		} else if (manualMode) {
@@ -161,7 +163,8 @@ public class Robot extends TimedRobot {
 		} else if (manualMode) {
 			Scheduler.getInstance().add(new ManualDriveWrist(0));
 		}
-
+		*/
+		/*
 		if (Robot.m_oi.operator.getRawButton(RobotMap.xButton)) {
 			Scheduler.getInstance().add(new UpdateWristSetpoint(
 					Robot.m_Wrist.getSetpointAngle() + 2 * Robot.m_oi.operator.getRawAxis(RobotMap.verticalLeft)));
@@ -176,10 +179,13 @@ public class Robot extends TimedRobot {
 			Scheduler.getInstance().add(new UpdateElevatorSetpoint((int) (Robot.m_Elevator.getSetpoint()
 					+ ((int) -100 * Robot.m_oi.operator.getRawAxis(RobotMap.verticalLeft)))));
 		}
-
+		*/
 		SmartDashboard.putNumber("Wrist Potentiometer", Robot.m_Wrist.getAngleDegrees());
 		SmartDashboard.putNumber("Climber front encoder", Robot.m_Climber.getFrontEncoderPosition());
 		SmartDashboard.putNumber("Climber rear encoder", Robot.m_Climber.getBackEncoderPosition());
+		
+		SmartDashboard.putBoolean("Elevator Limit", m_Elevator.getTopSwitch().get());// put elevator limit switch on DB
+
 	}
 
 	/**
@@ -265,7 +271,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putBoolean("Elevator Limit", m_Elevator.getTopSwitch().get());// put elevator limit switch on DB
 	}
 
 	/**

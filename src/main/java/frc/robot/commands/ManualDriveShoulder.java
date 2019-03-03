@@ -1,13 +1,14 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class ManualDriveShoulder extends Command{
 	public double speed;
 	
-	public ManualDriveShoulder(double value) {
-	    speed = value;	
+	public ManualDriveShoulder(Joystick controller, int axis) {
+	    speed = controller.getRawAxis(axis);
 	}
 	
 	protected void execute() {

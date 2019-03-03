@@ -62,6 +62,7 @@ public class OI {
 	public JoystickPOVButton setpointLeft = new JoystickPOVButton(operator, POV.WEST);
 	public JoystickPOVButton setpointRight = new JoystickPOVButton(operator, POV.EAST);
 	public JoystickButton calElevator = new JoystickButton(operator, RobotMap.startButton);
+	
 
 	// add buttons to driver
 	public JoystickButton spit = new JoystickButton(driver, RobotMap.bButton); // b button
@@ -73,7 +74,11 @@ public class OI {
 	// public JoystickButton liftButton = new JoystickButton(driver, 4); // y button
 	public JoystickButton hatch = new JoystickButton(driver, RobotMap.xButton); //x
 	public JoystickButton autoAim = new JoystickButton(driver, 10);
-
+	public JoystickAnalogButton extendF = new JoystickAnalogButton(driver, 2, Direction.UP);
+	public JoystickAnalogButton extendB = new JoystickAnalogButton(driver, 3, Direction.UP);
+	
+	
+	
 	//limit switches autoset position
 	public DigitalInputButton elevatorSwitch = new DigitalInputButton(Robot.m_Elevator.getTopSwitch(), true);
 	
@@ -101,16 +106,27 @@ public class OI {
 			//	Robot.m_Shoulder.getSetpointAngle() + 10 * operator.getRawAxis(RobotMap.verticalLeft)));
 		//elevator.whileHeld(new UpdateElevatorSetpoint(
 			//	(int) (Robot.m_Elevator.getSetpoint() + ((int) 10 * operator.getRawAxis(RobotMap.verticalLeft)))));
+		extendF.whileHeld(new DriveElevatorFront(driver.getRawAxis(RobotMap.lTrigger)));
+		extendB.whileHeld(new DriveElevatorRear(driver.getRawAxis(RobotMap.rTrigger)));
+		extendF.whenReleased(new DriveElevatorFront(0));
+		extendB.whenReleased(new DriveElevatorRear(0));
+		shoulder.whileHeld(new ManualUpdateShoulderSetpoint(operator, RobotMap.verticalLeft));
+		wrist.whileHeld(new ManualUpdateWristSetpoint(operator, RobotMap.verticalLeft));
+		elevator.whileHeld(new ManualUpdateElevatorSetpoint(operator, RobotMap.verticalLeft));
+		shoulder.whileHeld(new ManualDriveShoulder(operator, RobotMap.verticalLeft));
+		wrist.whileHeld(new ManualDriveWrist(operator, RobotMap.verticalLeft));
+		elevator.whileHeld(new ManualDriveElevator(operator, RobotMap.verticalLeft));
+		
 	}
 
-	public class joystickAnalogButton extends Button {
+	public class JoystickAnalogButton extends Button {
 
 		private Joystick stick;
 		private int axis;
-		private direction dir;
+		private Direction dir;
 		private double deadzone = 0.2;
 
-		joystickAnalogButton(Joystick joy, int axis, direction dir) {
+		JoystickAnalogButton(Joystick joy, int axis, Direction dir) {
 			this.stick = joy;
 			this.axis = axis;
 			this.dir = dir;
@@ -201,7 +217,7 @@ public class OI {
 		NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTWEST, WEST, NORTHWEST
 	}
 
-	enum direction {
+	enum Direction {
 		UP, DOWN
 	}
 }

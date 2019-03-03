@@ -65,6 +65,8 @@ public class RobotMap {
   public static int rBumper = 6;
   public static int selectButton = 7;
   public static int startButton = 8;
+  public static int lTrigger = 2;
+  public static int rTrigger = 3;
 
   //Constants
   public static int elevatorTopPosition = 13902;
