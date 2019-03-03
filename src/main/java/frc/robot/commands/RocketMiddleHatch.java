@@ -15,9 +15,9 @@ public class RocketMiddleHatch extends CommandGroup {
 			addSequential(new UpdateShoulderSetpoint(RobotMap.shoulderSafePoint)); // clear it from collisions
 		}
 		
-		addSequential(new UpdateElevatorSetpoint(RobotMap.rocketHatchMidElevatorHeight));
-		addSequential(new UpdateWristSetpoint(RobotMap.rocketHatchMidWristAngle));
-		addSequential(new UpdateShoulderSetpoint(RobotMap.rocketHatchMidShoulderAngle));
+		addParallel(new UpdateElevatorSetpoint(RobotMap.rocketHatchMidElevatorHeight));
+		addParallel(new UpdateShoulderSetpoint(RobotMap.rocketHatchMidShoulderAngle));
+		addParallel(new UpdateWristSetpoint(RobotMap.rocketHatchMidWristAngle));
 	}
 
 
