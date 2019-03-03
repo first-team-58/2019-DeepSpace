@@ -90,7 +90,9 @@ public class OI {
 		calibrateClimber.whenPressed(new CalibrateClimber());
 		climb.whenPressed(new DriveClimber(RobotMap.climberTarget));
 		spit.whileHeld(new Grab(1)); // not sure of speed
-		pull.whileHeld(new Grab(-1));
+		//spit.toggleWhenPressed(new Grab(1));
+		//pull.whileHeld(new Grab(-1));
+		pull.toggleWhenPressed(new Grab(-1));
 		retractF.whileHeld(new RetractFrontClimber());
 		retractB.whileHeld(new RetractBackClimber());
 		//wrist.whileHeld(new UpdateWristSetpoint(
