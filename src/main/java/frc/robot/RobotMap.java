@@ -69,6 +69,12 @@ public class RobotMap {
   //Constants
   public static int elevatorTopPosition = 13902;
   public static double elevatorCalSpeed = -.5; //1 is full speed down, -1 is full speed up
+  /*
+  -.5 is where Jack left off
+  -1; seems a little faster but not really
+  0; Dunno
+  1; Not much change, guessing that "Cal" is something Jack does at first button push?  Putting this back to -.5
+  */
   public static double climberCalSpeed = -.5; //1 is full speed down, -1 is full speed up
   public static double maxDriveSpeed = .70;
   
@@ -82,15 +88,26 @@ public class RobotMap {
   public static double shoulderNegitiveLimit = 230; //lowest angle for shoulder
   
   //PID values
-  public static double shoulderP = .5;
-  public static double shoulderI = .05;
+  public static double shoulderP = 2;//Was .5
+  public static double shoulderI = 1;//Was .05
   public static double shoulderD = 0;
-  public static double wristP = 4;
+  public static double wristP = 4;//Was 4
   public static double wristI = .1;
   public static double wristD = 0;
-  public static double elevatorP = .00071;
-  public static double elevatorI = .0001;
-  public static double elevatorD = 0;
+  public static double elevatorP = 0.0003058;//0.0000775 
+  /*
+  .0007; This is where jack left off
+  .001; is reasonable but a little slow (I)0 (D) 0
+  .00158; starts to Oscilate
+  .002; about the same
+  .01; try to crank it up. Faster but oscllates wildly
+  .1; Still slow, looking for a m x speed setting of some sort.
+  Is the CIM limited to .5 or something?
+  After unshackling the speed, .0005 worked reasonably, a little too fast.  .0003 didnt have enough to make it to setpoint.
+  .0004 still a little too violent
+  */
+  public static double elevatorI = 0.00000106;//.0001 .0000011 trips breaker
+  public static double elevatorD = 0;//.000009
   public static double climberPf = .0007;
   public static double climberIf = 0.0001;
   public static double climberDf = 0;
@@ -100,22 +117,22 @@ public class RobotMap {
   
   
   //PID Deadzones
-  public static int elevatorPositionDeadzone = 250; //double (math is absolute value, so abs(setpoint-pos) < this value)
+  public static int elevatorPositionDeadzone = 500; //was 250 chnaged to 500 to try to make it more consistant, double (math is absolute value, so abs(setpoint-pos) < this value)
   public static double shoulderPositionDeadzone = 7.5; //(math is absolute value, so abs(setpoint-pos) < this value)
   public static double wristPositionDeadzone = 7.5; //(math is absolute value, so abs(setpoint-pos) < this value)
   
   //Positions
   public static int rocketBallTopElevatorHeight = 14000; //top
   public static double rocketBallTopShoulderAngle = 74;
-  public static double rocketBallTopWristAngle = 88; //should be 5, but thats too low for the pot
+  public static double rocketBallTopWristAngle = 117; //was 88 should be 5, but thats too low for the pot
   
   public static int rocketBallMidElevatorHeight = 10500;
   public static double rocketBallMidShoulderAngle = 104;
-  public static double rocketBallMidWristAngle = 86;
+  public static double rocketBallMidWristAngle = 119;//was 86
 
   public static int rocketBallLowElevatorHeight = 3000;
   public static double rocketBallLowShoulderAngle = 137;
-  public static double rocketBallLowWristAngle = 123;
+  public static double rocketBallLowWristAngle = 162;//was 123
 
   public static int rocketHatchTopElevatorHeight = 14000;
   public static double rocketHatchTopShoulderAngle = 80;
@@ -123,15 +140,15 @@ public class RobotMap {
   
   public static int rocketHatchMidElevatorHeight = 2500;
   public static double rocketHatchMidShoulderAngle = 102;
-  public static double rocketHatchMidWristAngle = 173;
+  public static double rocketHatchMidWristAngle = 204; //was 173
   
   public static int rocketHatchLowElevatorHeight = 1500;
   public static double rocketHatchLowShoulderAngle = 167;
-  public static double rocketHatchLowWristAngle = 230;
+  public static double rocketHatchLowWristAngle = 255;//was 230
   
   public static int ballFromFloorElevatorHeight = 3000;
   public static double ballFromFloorShoulderAngle = 157;
-  public static double ballFromFloorWristAngle = 73;
+  public static double ballFromFloorWristAngle = 115;//was 73
   
   public static int hatchFromFloorElevatorHeight = 1500;
   public static double hatchFromFloorShoulderAngle = 177;

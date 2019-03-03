@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class ModifyCommandTable extends Command {
@@ -31,6 +32,8 @@ public class ModifyCommandTable extends Command {
 			Robot.cmdTBLY = 0;
 		}
 		System.out.println("cmdTBLX: " + Robot.cmdTBLX + " cmdTBLY: " + Robot.cmdTBLY);
+		SmartDashboard.putNumber("ElevatorLevel",Robot.cmdTBLY);//displays on smart dashboard 
+		SmartDashboard.putNumber("Hatch or Cargo",Robot.cmdTBLX);
 	}
 	
 	protected void end() {

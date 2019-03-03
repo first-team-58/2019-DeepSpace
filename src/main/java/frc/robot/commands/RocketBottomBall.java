@@ -7,9 +7,9 @@ import frc.robot.RobotMap;
 public class RocketBottomBall extends CommandGroup {
 	public RocketBottomBall() {
 		addParallel(new StartPID());
-		if (Robot.m_Shoulder.getAngle() > 200) {
+		if (Robot.m_Shoulder.getAngle() > 150) {
 			System.out.println("going to safe point");
-			addSequential(new UpdateShoulderSetpoint(200)); // clear it from collisions
+			addSequential(new UpdateShoulderSetpoint(150)); // clear it from collisions
 		}
 		
 		addSequential(new UpdateElevatorSetpoint(RobotMap.rocketBallLowElevatorHeight));

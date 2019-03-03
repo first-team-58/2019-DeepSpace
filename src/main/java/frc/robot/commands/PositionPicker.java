@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class PositionPicker extends CommandGroup {
 
@@ -30,6 +31,7 @@ public class PositionPicker extends CommandGroup {
 			break;
 		case 3: //rocket top hatch
 			addSequential(new RocketTopHatch());
+			//SmartDashboard.putNumber("PositionPicker",PositionPicker);//attempt to print position to dashboard
 			break;
 		}
 	}

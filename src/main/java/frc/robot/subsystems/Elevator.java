@@ -29,7 +29,8 @@ public class Elevator extends Subsystem{
 	}
     
     public DigitalInput getTopSwitch() {
-    	return i_topCalSwitch;
+        return i_topCalSwitch;
+        //SmartDashboard.putNumber("Elevator Limit Switch", i_topCalSwitch);
     }
     
     public int getEncoderPosition() {
@@ -62,20 +63,24 @@ public class Elevator extends Subsystem{
     
     public void drive(double speed) {
     	double speed2;
-    	if(speed > .5) {
-    		speed2 = .5;
-    	} else if(speed < -.5) {
-    		speed2 = -.5;
-    	} else {
+        
+        if(speed > .75) {//change the values if different max speed is desired 
+    		speed2 = .75;
+    	} else if(speed < -.75) {
+    		speed2 = -.75;
+        } else {
     		speed2 = speed;
     	}
-    	if(speed2 < 0 && !i_topCalSwitch.get()) { //If going up and top cal switch is triggered
+        
+        //speed2 = speed;
+        if(speed2 < 0 && !i_topCalSwitch.get()) { //If going up and top cal switch is triggered
     		
     	} else {
     		m_elevatorMotor.set(speed2);
     	}
     	
-    	SmartDashboard.putNumber("Elevator speed", speed2);
+        SmartDashboard.putNumber("Elevator speed", speed2);
+        //SmartDashboard.putNumber("Elevator Limit Switch", i_topCalSwitch);
     }
     
     public void setEncoderZero() {

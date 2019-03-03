@@ -132,7 +132,7 @@ public class Robot extends TimedRobot {
 
 		SmartDashboard.putNumber("Wrist angle", Robot.m_Wrist.getAngleDegrees());
 		SmartDashboard.putNumber("Wrist setpoint", Robot.m_Wrist.getSetpointAngle());
-
+	
 		SmartDashboard.putNumber("Elevator height", Robot.m_Elevator.getEncoderPosition());
 		SmartDashboard.putNumber("Elevator setpoint", Robot.m_Elevator.getSetpoint());
 
@@ -265,6 +265,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putBoolean("Elevator Limit", m_Elevator.getTopSwitch().get());//put elevator limit switch on DB
 	}
 
 	/**
