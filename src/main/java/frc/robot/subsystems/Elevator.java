@@ -23,6 +23,7 @@ public class Elevator extends Subsystem{
     public Elevator(){
         m_elevatorMotor = new WPI_TalonSRX(RobotMap.elevatorMotor);
         i_topCalSwitch = new DigitalInput(RobotMap.elevatorTopSwitch);
+        setEncoderPosition(10000);
     }
 
     public void setSetpoint(int setpoint) {
