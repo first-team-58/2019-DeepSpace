@@ -86,6 +86,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
+		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1); //turns limelight leds off
 
 		UsbCamera cam = CameraServer.getInstance().startAutomaticCapture(0);
 		UsbCamera cam2 = CameraServer.getInstance().startAutomaticCapture(1);

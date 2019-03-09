@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -9,6 +10,7 @@ public class PIDDrive extends Command {
 	
 	protected void initialize() {
 		toggle = !toggle;
+		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3); //turns limelight leds on
 	}
 
 	protected void execute() {
@@ -25,6 +27,7 @@ public class PIDDrive extends Command {
 	}
 
 	protected void end() {
+		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1); //turns limelight leds off
 		toggle = false;
 	}
 	
