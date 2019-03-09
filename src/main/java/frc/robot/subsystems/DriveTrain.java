@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 //import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.Drive;
 
@@ -94,6 +95,9 @@ public class DriveTrain extends Subsystem {
 			rotateValue = RobotMap.maxDriveSpeed;
 		} else if(rotateValue < -RobotMap.maxDriveSpeed) {
 			rotateValue = -RobotMap.maxDriveSpeed;
+		}
+		if(Robot.m_oi.driver.getRawButton(9)) {
+			moveValue = moveValue * .5;
 		}
 		m_drive.arcadeDrive(moveValue, rotateValue);
 
