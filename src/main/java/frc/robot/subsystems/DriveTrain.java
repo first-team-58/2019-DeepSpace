@@ -97,7 +97,8 @@ public class DriveTrain extends Subsystem {
 			rotateValue = -RobotMap.maxDriveSpeed;
 		}
 		if(Robot.m_oi.driver.getRawButton(9)) {
-			moveValue = moveValue * .5;
+			moveValue = moveValue * .8;
+			rotateValue = rotateValue * .8;
 		}
 		m_drive.arcadeDrive(moveValue, rotateValue);
 
