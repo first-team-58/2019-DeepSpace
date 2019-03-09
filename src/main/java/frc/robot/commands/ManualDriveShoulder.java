@@ -11,6 +11,10 @@ public class ManualDriveShoulder extends Command{
 	    speed = controller.getRawAxis(axis);
 	}
 	
+	public ManualDriveShoulder(double speed) {
+		this.speed = speed;
+	}
+	
 	protected void execute() {
 		if(Robot.manualMode) {
 			Robot.m_Shoulder.positionAchieved = true;

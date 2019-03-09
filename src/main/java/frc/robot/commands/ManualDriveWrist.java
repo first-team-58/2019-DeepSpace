@@ -11,6 +11,10 @@ public class ManualDriveWrist extends Command{
 	    speed = controller.getRawAxis(axis);
 	}
 
+	public ManualDriveWrist(double speed) {
+		this.speed = speed;
+	}
+	
 	protected void execute() {
 		if (Robot.manualMode) {
 			Robot.m_Wrist.positionAchieved = true;

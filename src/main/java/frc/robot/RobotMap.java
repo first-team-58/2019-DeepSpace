@@ -142,7 +142,7 @@ public class RobotMap {
 
   public static int rocketHatchTopElevatorHeight = 14000;
   public static double rocketHatchTopShoulderAngle = 80;
-  public static double rocketHatchTopWristAngle = 142;
+  public static double rocketHatchTopWristAngle = 182;
   
   public static int rocketHatchMidElevatorHeight = 2500;
   public static double rocketHatchMidShoulderAngle = 102;

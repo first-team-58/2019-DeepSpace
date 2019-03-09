@@ -137,6 +137,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Elevator height", Robot.m_Elevator.getEncoderPosition());
 		SmartDashboard.putNumber("Elevator setpoint", Robot.m_Elevator.getSetpoint());
 
+		SmartDashboard.putBoolean("Manual Mode", manualMode);
+
 		// IDK how to do this in OI properly yet
 		/*
 		if (Robot.m_oi.driver.getRawAxis(2) > .1) {
@@ -146,7 +148,7 @@ public class Robot extends TimedRobot {
 			Robot.m_Climber.runClimberBack(Robot.m_oi.driver.getRawAxis(3));
 		}
 		 */
-		/*
+		
 		if (Robot.m_oi.operator.getRawButton(RobotMap.aButton) && manualMode) {
 			Scheduler.getInstance().add(new ManualDriveShoulder(Robot.m_oi.operator.getRawAxis(RobotMap.verticalLeft)));
 		} else if (manualMode) {
@@ -164,8 +166,8 @@ public class Robot extends TimedRobot {
 		} else if (manualMode) {
 			Scheduler.getInstance().add(new ManualDriveWrist(0));
 		}
-		*/
-		/*
+		
+		
 		if (Robot.m_oi.operator.getRawButton(RobotMap.xButton)) {
 			Scheduler.getInstance().add(new UpdateWristSetpoint(
 					Robot.m_Wrist.getSetpointAngle() + 2 * Robot.m_oi.operator.getRawAxis(RobotMap.verticalLeft)));
@@ -180,7 +182,7 @@ public class Robot extends TimedRobot {
 			Scheduler.getInstance().add(new UpdateElevatorSetpoint((int) (Robot.m_Elevator.getSetpoint()
 					+ ((int) -100 * Robot.m_oi.operator.getRawAxis(RobotMap.verticalLeft)))));
 		}
-		*/
+		
 		SmartDashboard.putNumber("Wrist Potentiometer", Robot.m_Wrist.getAngleDegrees());
 		SmartDashboard.putNumber("Climber front encoder", Robot.m_Climber.getFrontEncoderPosition());
 		SmartDashboard.putNumber("Climber rear encoder", Robot.m_Climber.getBackEncoderPosition());

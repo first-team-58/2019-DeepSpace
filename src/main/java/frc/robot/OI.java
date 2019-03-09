@@ -110,12 +110,12 @@ public class OI {
 		extendB.whileHeld(new DriveElevatorRear(driver.getRawAxis(RobotMap.rTrigger)));
 		extendF.whenReleased(new DriveElevatorFront(0));
 		extendB.whenReleased(new DriveElevatorRear(0));
-		shoulder.whileHeld(new ManualUpdateShoulderSetpoint(operator, RobotMap.verticalLeft));
-		wrist.whileHeld(new ManualUpdateWristSetpoint(operator, RobotMap.verticalLeft));
-		elevator.whileHeld(new ManualUpdateElevatorSetpoint(operator, RobotMap.verticalLeft));
-		shoulder.whileHeld(new ManualDriveShoulder(operator, RobotMap.verticalLeft));
-		wrist.whileHeld(new ManualDriveWrist(operator, RobotMap.verticalLeft));
-		elevator.whileHeld(new ManualDriveElevator(operator, RobotMap.verticalLeft));
+		//shoulder.whileHeld(new ManualUpdateShoulderSetpoint(operator, RobotMap.verticalLeft));
+		//wrist.whileHeld(new ManualUpdateWristSetpoint(operator, RobotMap.verticalLeft));
+		//elevator.whileHeld(new ManualUpdateElevatorSetpoint(operator, RobotMap.verticalLeft));
+		//shoulder.whileHeld(new ManualDriveShoulder(operator, RobotMap.verticalLeft));
+		//wrist.whileHeld(new ManualDriveWrist(operator, RobotMap.verticalLeft));
+		//elevator.whileHeld(new ManualDriveElevator(operator, RobotMap.verticalLeft));
 		
 	}
 

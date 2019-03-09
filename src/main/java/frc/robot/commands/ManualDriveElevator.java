@@ -11,6 +11,10 @@ public class ManualDriveElevator extends Command{
 	    speed = controller.getRawAxis(axis);
 	}
 
+	public ManualDriveElevator(double speed) {
+		this.speed = speed;
+	}
+	
 	protected void execute() {
 		if (Robot.manualMode) {
 			Robot.m_Elevator.positionAchieved = true;
