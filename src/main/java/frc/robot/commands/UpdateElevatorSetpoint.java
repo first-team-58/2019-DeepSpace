@@ -22,7 +22,7 @@ public class UpdateElevatorSetpoint extends Command {
 	@Override
 	protected boolean isFinished() {
 		if(Math.abs(setpoint - Robot.m_Elevator.getEncoderPosition()) < RobotMap.elevatorPositionDeadzone) {
-			System.out.println("Elevator at position: " + (setpoint - Robot.m_Elevator.getEncoderPosition()));
+			//System.out.println("Elevator at position: " + (setpoint - Robot.m_Elevator.getEncoderPosition()));
 			return true;
 		} else {
 			return false;

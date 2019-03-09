@@ -8,6 +8,7 @@ public class SetElevatorPosition extends Command{
 
 	protected void execute() {
 		Robot.m_Elevator.setEncoderPosition(RobotMap.elevatorTopPosition);
+		Robot.m_Elevator.calibrated = true;
 	}
 	
 	@Override

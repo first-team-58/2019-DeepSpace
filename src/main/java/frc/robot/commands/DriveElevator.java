@@ -14,7 +14,7 @@ public class DriveElevator extends Command {
 	public DriveElevator(int position) {
 		Robot.m_Elevator.setSetpoint(position);
 		requires(Robot.m_Elevator);
-		SmartDashboard.putNumber("ElevatorFloor",position);//futile attempt
+		//SmartDashboard.putNumber("ElevatorFloor",position);//futile attempt
 	}
 	
 	protected void initialize() {

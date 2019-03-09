@@ -78,14 +78,14 @@ public class Climber extends Subsystem {
 		PID();
 		runClimberFront(pidOutf);
 		runClimberBack(pidOutr);
-		SmartDashboard.putNumber("Climber pidoutf", pidOutf);
-		SmartDashboard.putNumber("Climber pidoutr", pidOutr);
+		//SmartDashboard.putNumber("Climber pidoutf", pidOutf);
+		//SmartDashboard.putNumber("Climber pidoutr", pidOutr);
 	}
 
 	public void runClimberUp(double moveValue) {
 		m_ClimberFront.set(moveValue);
 		m_ClimberBack.set(moveValue);
-		SmartDashboard.putNumber("Movevalue climber", moveValue);
+		//SmartDashboard.putNumber("Movevalue climber", moveValue);
 	}
 
 	public void runClimberFront(double moveValue) {

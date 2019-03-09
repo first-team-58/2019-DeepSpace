@@ -10,7 +10,7 @@ public class FloorBall extends CommandGroup {
 		SmartDashboard.putString("Current Setpoint Position", "Floor Ball");
 		addParallel(new StartPID());
 		if (Robot.m_Shoulder.getAngle() > RobotMap.shoulderSafePoint) {
-			System.out.println("going to safe point");
+			//System.out.println("going to safe point");
 			addSequential(new UpdateShoulderSetpoint(RobotMap.shoulderSafePoint)); // clear it from collisions was 200 also above if statement
 		}
 		

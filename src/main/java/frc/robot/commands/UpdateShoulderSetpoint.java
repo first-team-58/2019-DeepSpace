@@ -12,9 +12,9 @@ public class UpdateShoulderSetpoint extends Command {
 	}
 	
 	protected void initialize() {
-		System.out.println("changing setpoint from: " + Robot.m_Shoulder.getAngle() + " to " + setpoint);
+		//System.out.println("changing setpoint from: " + Robot.m_Shoulder.getAngle() + " to " + setpoint);
 		Robot.m_Shoulder.setSetpointAngle(setpoint);
-		System.out.println("setpoint changed to: " + Robot.m_Shoulder.getSetpointAngle());
+		//System.out.println("setpoint changed to: " + Robot.m_Shoulder.getSetpointAngle());
 	}
 
 	protected void execute() {
@@ -24,7 +24,7 @@ public class UpdateShoulderSetpoint extends Command {
 	@Override
 	protected boolean isFinished() {
 		if(Math.abs(setpoint-Robot.m_Shoulder.getAngle()) < RobotMap.shoulderPositionDeadzone) {
-			System.out.println("Shoulder at position: " + (setpoint - Robot.m_Shoulder.getAngle()));
+			//System.out.println("Shoulder at position: " + (setpoint - Robot.m_Shoulder.getAngle()));
 			return true;
 		} else {
 			return false;

@@ -92,8 +92,8 @@ public double getSetpointAngle() {
         if(m_armMotor.getOutputCurrent() > maxamp) {
         	maxamp = m_armMotor.getOutputCurrent();
         }
-        SmartDashboard.putNumber("Shoulder amperage", maxamp);
-    	SmartDashboard.putNumber("Shoulder speed", Double.valueOf(String.format("%.5f", v2)));
+        //SmartDashboard.putNumber("Shoulder amperage", maxamp);
+    	//SmartDashboard.putNumber("Shoulder speed", Double.valueOf(String.format("%.5f", v2)));
     }
     
 	@Override

@@ -72,12 +72,12 @@ public class Wrist extends Subsystem {
 			m_wristMotor.set(v2);
 
 		}
-		SmartDashboard.putNumber("Wrist speed", Double.valueOf(String.format("%.4f", v2)));
+		//SmartDashboard.putNumber("Wrist speed", Double.valueOf(String.format("%.4f", v2)));
 	}
 
 	public void drivePID() {
 		PID();
-		SmartDashboard.putNumber("Wrist pidOut", pidOut);
+		//SmartDashboard.putNumber("Wrist pidOut", pidOut);
 		drive(-pidOut);
 	}
 

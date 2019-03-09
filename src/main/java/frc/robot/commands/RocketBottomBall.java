@@ -10,7 +10,7 @@ public class RocketBottomBall extends CommandGroup {
 		SmartDashboard.putString("Current Setpoint Position", "Rocket Bottom Ball");
 		addParallel(new StartPID());
 		if (Robot.m_Shoulder.getAngle() > RobotMap.shoulderSafePoint) {
-			System.out.println("going to safe point");
+			//System.out.println("going to safe point");
 			addSequential(new UpdateShoulderSetpoint(RobotMap.shoulderSafePoint)); // clear it from collisions
 		}
 		

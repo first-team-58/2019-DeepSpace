@@ -31,7 +31,7 @@ public class ModifyCommandTable extends Command {
 		} else if(Robot.cmdTBLY < 0) {
 			Robot.cmdTBLY = 0;
 		}
-		System.out.println("cmdTBLX: " + Robot.cmdTBLX + " cmdTBLY: " + Robot.cmdTBLY);
+		//System.out.println("cmdTBLX: " + Robot.cmdTBLX + " cmdTBLY: " + Robot.cmdTBLY);
 		SmartDashboard.putNumber("ElevatorLevel",Robot.cmdTBLY);//displays on smart dashboard 
 		SmartDashboard.putNumber("Hatch or Cargo",Robot.cmdTBLX);
 	}

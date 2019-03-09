@@ -106,8 +106,8 @@ public class OI {
 			//	Robot.m_Shoulder.getSetpointAngle() + 10 * operator.getRawAxis(RobotMap.verticalLeft)));
 		//elevator.whileHeld(new UpdateElevatorSetpoint(
 			//	(int) (Robot.m_Elevator.getSetpoint() + ((int) 10 * operator.getRawAxis(RobotMap.verticalLeft)))));
-		extendF.whileHeld(new DriveElevatorFront(driver.getRawAxis(RobotMap.lTrigger)));
-		extendB.whileHeld(new DriveElevatorRear(driver.getRawAxis(RobotMap.rTrigger)));
+		extendF.whileHeld(new DriveElevatorFront(1));
+		extendB.whileHeld(new DriveElevatorRear(1));
 		extendF.whenReleased(new DriveElevatorFront(0));
 		extendB.whenReleased(new DriveElevatorRear(0));
 		//shoulder.whileHeld(new ManualUpdateShoulderSetpoint(operator, RobotMap.verticalLeft));

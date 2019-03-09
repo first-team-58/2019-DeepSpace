@@ -37,6 +37,7 @@ import frc.robot.commands.UpdateClimberSetpoint;
 import frc.robot.commands.UpdateElevatorSetpoint;
 import frc.robot.commands.UpdateShoulderSetpoint;
 import frc.robot.commands.UpdateWristSetpoint;
+import frc.robot.commands.ExitStartingConfig;
 import frc.robot.subsystems.*;
 import edu.wpi.first.networktables.*;
 
@@ -71,6 +72,8 @@ public class Robot extends TimedRobot {
 	public static AnalogInput t;
 	public static double testangle = 20;
 
+public static boolean hasRun = false;
+
 	public static NetworkTable adjustables = NetworkTableInstance.getDefault().getTable("adjustables");
 
 	public static int cmdTBLX = 0, cmdTBLY = 0;
@@ -89,7 +92,7 @@ public class Robot extends TimedRobot {
 		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1); //turns limelight leds off
 
 		UsbCamera cam = CameraServer.getInstance().startAutomaticCapture(0);
-		UsbCamera cam2 = CameraServer.getInstance().startAutomaticCapture(1);
+		//UsbCamera cam2 = CameraServer.getInstance().startAutomaticCapture(1);
 		// ahrs = new AHRS().Port.kMXP); /* Alternatives: SPI.Port.kMXP, I2C.Port.kMXP
 		// or SerialPort.Port.kUSB */
 		// m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
@@ -119,15 +122,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotPeriodic() {
-		// SmartDashboard.putNumber("Limelight x", tx.getDouble(0.0));
-		// SmartDashboard.putNumber("Limelight y", ty.getDouble(0.0));
-		SmartDashboard.putNumber("Limelight a", ta.getDouble(0.0));
-		// SmartDashboard.putString("Limelight targets", tv.getString("0"));
-		SmartDashboard.putNumber("angle", ahrs.getAngle());
-		// Robot.m_drivetrain.P = SmartDashboard.getNumber("P", 1.0);
-		// Robot.m_drivetrain.I = SmartDashboard.getNumber("I", 1.0);
-		// Robot.m_drivetrain.D = SmartDashboard.getNumber("D", 1.0);
-
 		SmartDashboard.putNumber("Shoulder angle", Robot.m_Shoulder.getAngle());
 		SmartDashboard.putNumber("Shoulder setpoint", Robot.m_Shoulder.getSetpointAngle());
 
@@ -138,16 +132,6 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Elevator setpoint", Robot.m_Elevator.getSetpoint());
 
 		SmartDashboard.putBoolean("Manual Mode", manualMode);
-
-		// IDK how to do this in OI properly yet
-		/*
-		if (Robot.m_oi.driver.getRawAxis(2) > .1) {
-			Robot.m_Climber.runClimberFront(Robot.m_oi.driver.getRawAxis(2));
-		}
-		if (Robot.m_oi.driver.getRawAxis(3) > .1) {
-			Robot.m_Climber.runClimberBack(Robot.m_oi.driver.getRawAxis(3));
-		}
-		 */
 		
 		if (Robot.m_oi.operator.getRawButton(RobotMap.aButton) && manualMode) {
 			Scheduler.getInstance().add(new ManualDriveShoulder(Robot.m_oi.operator.getRawAxis(RobotMap.verticalLeft)));
@@ -183,11 +167,7 @@ public class Robot extends TimedRobot {
 					+ ((int) -100 * Robot.m_oi.operator.getRawAxis(RobotMap.verticalLeft)))));
 		}
 		
-		SmartDashboard.putNumber("Wrist Potentiometer", Robot.m_Wrist.getAngleDegrees());
-		SmartDashboard.putNumber("Climber front encoder", Robot.m_Climber.getFrontEncoderPosition());
-		SmartDashboard.putNumber("Climber rear encoder", Robot.m_Climber.getBackEncoderPosition());
-		
-		SmartDashboard.putBoolean("Elevator Limit", m_Elevator.getTopSwitch().get());// put elevator limit switch on DB
+		SmartDashboard.putBoolean("Elevator Calibrated", Robot.m_Elevator.calibrated);
 
 	}
 
@@ -233,7 +213,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
+		//m_autonomousCommand = m_chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
@@ -243,8 +223,12 @@ public class Robot extends TimedRobot {
 		 */
 
 		// schedule the autonomous command (example)
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.start();
+		//if (m_autonomousCommand != null) {
+		//	m_autonomousCommand.start();
+		//}
+		if(!hasRun) {
+		Scheduler.getInstance().add(new ExitStartingConfig());
+			hasRun = true;
 		}
 	}
 
@@ -281,6 +265,19 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+		// SmartDashboard.putNumber("Limelight x", tx.getDouble(0.0));
+		// SmartDashboard.putNumber("Limelight y", ty.getDouble(0.0));
+		SmartDashboard.putNumber("Limelight a", ta.getDouble(0.0));
+		// SmartDashboard.putString("Limelight targets", tv.getString("0"));
+		SmartDashboard.putNumber("angle", ahrs.getAngle());
+		// Robot.m_drivetrain.P = SmartDashboard.getNumber("P", 1.0);
+		// Robot.m_drivetrain.I = SmartDashboard.getNumber("I", 1.0);
+		// Robot.m_drivetrain.D = SmartDashboard.getNumber("D", 1.0);
+		SmartDashboard.putNumber("Wrist Potentiometer", Robot.m_Wrist.getAngleDegrees());
+		SmartDashboard.putNumber("Climber front encoder", Robot.m_Climber.getFrontEncoderPosition());
+		SmartDashboard.putNumber("Climber rear encoder", Robot.m_Climber.getBackEncoderPosition());
+		
+		SmartDashboard.putBoolean("Elevator Limit", m_Elevator.getTopSwitch().get());// put elevator limit switch on DB
 	}
 
 	// adds values to network tables

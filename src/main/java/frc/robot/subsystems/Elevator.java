@@ -18,6 +18,7 @@ public class Elevator extends Subsystem{
     private double pidOut = 0;
     private double P, I, D;
     public boolean positionAchieved = true;
+    public boolean calibrated = false;
     
     public Elevator(){
         m_elevatorMotor = new WPI_TalonSRX(RobotMap.elevatorMotor);
@@ -58,7 +59,7 @@ public class Elevator extends Subsystem{
     public void drivePID() {
     	PID();
     	drive(pidOut);
-    	SmartDashboard.putNumber("Elevator pidOut", pidOut);
+    	//SmartDashboard.putNumber("Elevator pidOut", pidOut);
     }
     
     public void drive(double speed) {
@@ -79,7 +80,7 @@ public class Elevator extends Subsystem{
     		m_elevatorMotor.set(speed2);
     	}
     	
-        SmartDashboard.putNumber("Elevator speed", speed2);
+        //SmartDashboard.putNumber("Elevator speed", speed2);
         //SmartDashboard.putNumber("Elevator Limit Switch", i_topCalSwitch);
     }
     

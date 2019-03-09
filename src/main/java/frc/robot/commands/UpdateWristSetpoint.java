@@ -22,7 +22,7 @@ public class UpdateWristSetpoint extends Command {
 	@Override
 	protected boolean isFinished() {
 		if(Math.abs(setpoint-Robot.m_Wrist.getAngleDegrees()) < RobotMap.wristPositionDeadzone) {
-			System.out.println("Wrist at position: " + (setpoint - Robot.m_Wrist.getAngleDegrees()));
+			//System.out.println("Wrist at position: " + (setpoint - Robot.m_Wrist.getAngleDegrees()));
 			return true;
 
 		} else {
