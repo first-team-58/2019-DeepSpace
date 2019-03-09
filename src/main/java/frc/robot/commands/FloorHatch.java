@@ -14,9 +14,9 @@ public class FloorHatch extends CommandGroup {
 			addSequential(new UpdateShoulderSetpoint(RobotMap.shoulderSafePoint)); // clear it from collisions
 		}
 		
-		addSequential(new UpdateElevatorSetpoint(RobotMap.hatchFromFloorElevatorHeight));
-		addSequential(new UpdateWristSetpoint(RobotMap.hatchFromFloorWristAngle));
-		addSequential(new UpdateShoulderSetpoint(RobotMap.hatchFromFloorShoulderAngle));
+		addSequential(new UpdateElevatorSetpoint(RobotMap.rocketHatchLowElevatorHeight));
+		addSequential(new UpdateWristSetpoint(RobotMap.rocketHatchLowWristAngle));
+		addSequential(new UpdateShoulderSetpoint(RobotMap.rocketHatchLowShoulderAngle));
 	}
 
 }

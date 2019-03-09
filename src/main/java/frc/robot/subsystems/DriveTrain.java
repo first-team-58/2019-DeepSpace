@@ -36,7 +36,7 @@ public class DriveTrain extends Subsystem {
 	//private Solenoid m_SpeedSolenoid;
 	private AHRS gyro;
 
-	public double P = 0.05, I = 0.01, D = 0;
+	public double P = 0.1, I = 0.01, D = 0;
 
 	double integral, previous_error;
 	public double setpoint = 0;

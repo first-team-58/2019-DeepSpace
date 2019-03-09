@@ -14,9 +14,9 @@ public class FloorBall extends CommandGroup {
 			addSequential(new UpdateShoulderSetpoint(RobotMap.shoulderSafePoint)); // clear it from collisions was 200 also above if statement
 		}
 		
-		addSequential(new UpdateElevatorSetpoint(RobotMap.ballFromFloorElevatorHeight));
-		addSequential(new UpdateWristSetpoint(RobotMap.ballFromFloorWristAngle));
-		addSequential(new UpdateShoulderSetpoint(RobotMap.ballFromFloorShoulderAngle));
+		addParallel(new UpdateElevatorSetpoint(RobotMap.ballFromFloorElevatorHeight));
+		addParallel(new UpdateWristSetpoint(RobotMap.ballFromFloorWristAngle));
+		addParallel(new UpdateShoulderSetpoint(RobotMap.ballFromFloorShoulderAngle));
 	}
 
 

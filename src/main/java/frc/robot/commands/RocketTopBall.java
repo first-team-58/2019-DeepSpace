@@ -9,8 +9,8 @@ public class RocketTopBall extends CommandGroup {
 	public RocketTopBall() {
 		SmartDashboard.putString("Current Setpoint Position", "Rocket Top Ball");
 		addParallel(new StartPID());
-		addSequential(new UpdateElevatorSetpoint(RobotMap.rocketBallTopElevatorHeight));
-		addSequential(new UpdateWristSetpoint(RobotMap.rocketBallTopWristAngle));
-		addSequential(new UpdateShoulderSetpoint(RobotMap.rocketBallTopShoulderAngle));
+		addParallel(new UpdateElevatorSetpoint(RobotMap.rocketBallTopElevatorHeight));
+		addParallel(new UpdateWristSetpoint(RobotMap.rocketBallTopWristAngle));
+		addParallel(new UpdateShoulderSetpoint(RobotMap.rocketBallTopShoulderAngle));
 	}
 }

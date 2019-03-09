@@ -7,6 +7,7 @@ import frc.robot.RobotMap;
 
 public class PIDDrive extends Command {
 	private static boolean toggle = false;
+	private double offset = 8;
 	
 	protected void initialize() {
 		toggle = !toggle;
@@ -17,7 +18,7 @@ public class PIDDrive extends Command {
 		if (Robot.tx.getDouble(0.0)!=0.0) {
 			//System.out.println("running pid");
 			double moveValue = Robot.m_oi.driver.getRawAxis(RobotMap.moveAxis);
-			Robot.m_drivetrain.setSetpoint(Robot.tx.getDouble(Robot.m_drivetrain.setpoint));
+			Robot.m_drivetrain.setSetpoint(Robot.tx.getDouble(Robot.m_drivetrain.setpoint) + offset);
 			if ((moveValue <= 0.2) && (moveValue >= -0.2)) {
 				moveValue = 0;
 			}
@@ -33,7 +34,7 @@ public class PIDDrive extends Command {
 	
 	@Override
 	protected boolean isFinished() {
-		return toggle;
+		return true;
 	}
 
 }

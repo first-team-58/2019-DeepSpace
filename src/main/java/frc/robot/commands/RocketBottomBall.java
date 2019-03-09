@@ -14,8 +14,8 @@ public class RocketBottomBall extends CommandGroup {
 			addSequential(new UpdateShoulderSetpoint(RobotMap.shoulderSafePoint)); // clear it from collisions
 		}
 		
-		addSequential(new UpdateElevatorSetpoint(RobotMap.rocketBallLowElevatorHeight));
-		addSequential(new UpdateWristSetpoint(RobotMap.rocketBallLowWristAngle));
-		addSequential(new UpdateShoulderSetpoint(RobotMap.rocketBallLowShoulderAngle));
+		addParallel(new UpdateElevatorSetpoint(RobotMap.rocketBallLowElevatorHeight));
+		addParallel(new UpdateWristSetpoint(RobotMap.rocketBallLowWristAngle));
+		addParallel(new UpdateShoulderSetpoint(RobotMap.rocketBallLowShoulderAngle));
 	}
 }
