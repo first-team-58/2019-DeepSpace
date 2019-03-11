@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.cameraserver.*;
@@ -71,7 +72,9 @@ public class Robot extends TimedRobot {
 	public static double test;
 	public static AnalogInput t;
 	public static double testangle = 20;
-
+	public static PowerDistributionPanel pdp;
+	
+	
 public static boolean hasRun = false;
 
 	public static NetworkTable adjustables = NetworkTableInstance.getDefault().getTable("adjustables");
@@ -90,7 +93,7 @@ public static boolean hasRun = false;
 	public void robotInit() {
 		m_oi = new OI();
 		NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1); //turns limelight leds off
-
+		pdp = new PowerDistributionPanel();
 		UsbCamera cam = CameraServer.getInstance().startAutomaticCapture(0);
 		//UsbCamera cam2 = CameraServer.getInstance().startAutomaticCapture(1);
 		// ahrs = new AHRS().Port.kMXP); /* Alternatives: SPI.Port.kMXP, I2C.Port.kMXP

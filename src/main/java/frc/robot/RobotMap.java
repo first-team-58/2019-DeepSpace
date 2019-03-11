@@ -84,8 +84,8 @@ public class RobotMap {
   public static int shoulderPotentiometer = 0;
   
   //Angle limits
-  public static double wristPositiveLimit = 300; //max angle for wrist
-  public static double wristNegitiveLimit = 30; //min angle for wrist
+  public static double wristPositiveLimit = 340; //max angle for wrist
+  public static double wristNegitiveLimit = 5; //min angle for wrist
   public static double shoulderPositiveLimit = 20; //highest angle for shoulder
   public static double shoulderNegitiveLimit = 230; //lowest angle for shoulder
   

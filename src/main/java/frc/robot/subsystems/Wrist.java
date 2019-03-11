@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class Wrist extends Subsystem {
@@ -68,6 +69,8 @@ public class Wrist extends Subsystem {
 																			// turn ccw when angle > 300
 		} else if (v2 < 0 && getAngleDegrees() < RobotMap.wristNegitiveLimit) { // wrist rotating clockwise | will not
 																				// turn cw when angle < 50
+		} else if(Robot.pdp.getCurrent(11) > 3) {
+			
 		} else {
 			m_wristMotor.set(v2);
 
