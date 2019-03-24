@@ -41,6 +41,7 @@ import frc.robot.commands.UpdateWristSetpoint;
 import frc.robot.commands.ExitStartingConfig;
 import frc.robot.subsystems.*;
 import edu.wpi.first.networktables.*;
+import edu.wpi.first.hal.PWMJNI;  
 
 import java.util.function.Consumer;
 
@@ -61,6 +62,7 @@ public class Robot extends TimedRobot {
 	public static Climber m_Climber = new Climber();
 	public static Elevator m_Elevator = new Elevator();
 	public static Wrist m_Wrist = new Wrist();
+	public static Gripper servoGripper = new Gripper();
 	public static OI m_oi;
 	public static AHRS ahrs;
 	public static NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -68,6 +70,7 @@ public class Robot extends TimedRobot {
 	public static NetworkTableEntry ty = table.getEntry("ty");
 	public static NetworkTableEntry ta = table.getEntry("ta");
 	public static NetworkTableEntry tv = table.getEntry("tv");
+	//public static AnalogInput test2 = new AnalogInput(1); Was missing "public static"?
 	AnalogInput test2 = new AnalogInput(1);
 	public static double test;
 	public static AnalogInput t;
@@ -172,6 +175,19 @@ public static boolean hasRun = false;
 		
 		SmartDashboard.putBoolean("Elevator Calibrated", Robot.m_Elevator.calibrated);
 
+		//if (Robot.m_oi.operator.getRawAxis(3) > 0.2) {
+		//	Robot.m_Gripper.setHookAngle(RobotMap.Hookclose); 
+		//}else{
+		//	Robot.m_Gripper.setHookAngle(RobotMap.Hookopen); 
+
+		//}
+		if(Robot.m_oi.operator.getRawButton(RobotMap.rBumper)) {
+			//Robot.m_Gripper.setHookAngle(200);
+		} else {
+			//Robot.m_Gripper.setHookAngle(100);
+		}
+		
+
 	}
 
 	/**
@@ -195,6 +211,7 @@ public static boolean hasRun = false;
 		Robot.m_Climber.integralr = 0;
 		Robot.m_Climber.previous_errorf = 0;
 		Robot.m_Climber.previous_errorr = 0;
+		
 	}
 
 	@Override

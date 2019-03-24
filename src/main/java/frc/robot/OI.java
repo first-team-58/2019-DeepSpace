@@ -62,7 +62,7 @@ public class OI {
 	public JoystickPOVButton setpointLeft = new JoystickPOVButton(operator, POV.WEST);
 	public JoystickPOVButton setpointRight = new JoystickPOVButton(operator, POV.EAST);
 	public JoystickButton calElevator = new JoystickButton(operator, RobotMap.startButton);
-	
+	public JoystickButton hook = new JoystickButton(operator, RobotMap.rBumper); // right bumper
 
 	// add buttons to driver
 	public JoystickButton spit = new JoystickButton(driver, RobotMap.bButton); // b button

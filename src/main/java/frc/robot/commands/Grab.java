@@ -22,6 +22,12 @@ public class Grab extends Command {
     requires(Robot.m_Gripper);
   }
 
+  //public Hook(double moveValue){
+    //this.moveValue = moveValue;
+    //requires(Robot.Hook);
+
+  //}
+
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {

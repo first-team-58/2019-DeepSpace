@@ -40,11 +40,11 @@ public class Drive extends Command {
     }
     
     // round up values for full speed
-    if (moveValue > 0.9) {
+    if (moveValue > 0.95) {
       moveValue = 1;
     }
 
-    if(moveValue < -0.9) {
+    if(moveValue < -0.95) {
       moveValue = -1;
     }
 

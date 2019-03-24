@@ -43,6 +43,9 @@ public class RobotMap {
   
   // solenoid ids
   public static int hatchSolenoid = 0;
+  
+  //PWM Ports
+  public static int hookServo = 0;
 
   //Joysticks
   public static int driver = 0;
@@ -61,7 +64,7 @@ public class RobotMap {
   public static int bButton = 2;
   public static int xButton = 3;
   public static int yButton = 4;
-  public static int lBumper = 5;
+  public static int lBumper = 5;//JACK - These seem backward =. shouldn't they be left 4 and right 5?
   public static int rBumper = 6;
   public static int selectButton = 7;
   public static int startButton = 8;
@@ -93,8 +96,8 @@ public class RobotMap {
   public static double shoulderP = 2;//Was .5
   public static double shoulderI = 1;//Was .05
   public static double shoulderD = 0;
-  public static double wristP = 4;//Was 4
-  public static double wristI = .1;
+  public static double wristP = 1.5;//Was 4
+  public static double wristI = 0;//Was.1
   public static double wristD = 0;
   public static double elevatorP = 0.0003058;//0.0000775 
   /*
@@ -144,14 +147,16 @@ public class RobotMap {
   public static double rocketHatchTopShoulderAngle = 80;
   public static double rocketHatchTopWristAngle = 182;
   
-  public static int rocketHatchMidElevatorHeight = 2500;
+  //Update 3/23: Elevator setpoint was at 2500 before we changed the wrist to a snowblower
+  public static int rocketHatchMidElevatorHeight = 6500;
   public static double rocketHatchMidShoulderAngle = 102;
   public static double rocketHatchMidWristAngle = 204; //was 173
   
-  public static int rocketHatchLowElevatorHeight = 1500;
+  //Update 3/23: Elevator setpoint was at 1500 before we changed the wrist to a snowblower
+  public static int rocketHatchLowElevatorHeight = 5500;
   public static double rocketHatchLowShoulderAngle = 167;
-  public static double rocketHatchLowWristAngle = 255;//was 230
-  
+  //was 230 3/23/2019 was 255 (changed wrist to snow blower.  after that the angle for the human players station was too high)
+  public static double rocketHatchLowWristAngle = 238;
   public static int ballFromFloorElevatorHeight = 3000;
   public static double ballFromFloorShoulderAngle = 157;
   public static double ballFromFloorWristAngle = 115;//was 73
@@ -159,8 +164,12 @@ public class RobotMap {
   public static int hatchFromFloorElevatorHeight = 1500;
   public static double hatchFromFloorShoulderAngle = 177;
   public static double hatchFromFloorWristAngle = 154;
+
+  //public static double Hookopen = 0; 
+  //public static double Hookclose = 1;
+  //public static double angle;
   
-  public static int climberTarget = 24000;
+  public static int climberTarget = 24000;//How high we climb?
   
   public static long shoulderZero = 0;
   public static int wristZero = 0;
