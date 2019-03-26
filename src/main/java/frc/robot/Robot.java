@@ -62,7 +62,6 @@ public class Robot extends TimedRobot {
 	public static Climber m_Climber = new Climber();
 	public static Elevator m_Elevator = new Elevator();
 	public static Wrist m_Wrist = new Wrist();
-	public static Gripper servoGripper = new Gripper();
 	public static OI m_oi;
 	public static AHRS ahrs;
 	public static NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -71,7 +70,7 @@ public class Robot extends TimedRobot {
 	public static NetworkTableEntry ta = table.getEntry("ta");
 	public static NetworkTableEntry tv = table.getEntry("tv");
 	//public static AnalogInput test2 = new AnalogInput(1); Was missing "public static"?
-	AnalogInput test2 = new AnalogInput(1);
+	//AnalogInput test2 = new AnalogInput(1);
 	public static double test;
 	public static AnalogInput t;
 	public static double testangle = 20;
@@ -182,9 +181,9 @@ public static boolean hasRun = false;
 
 		//}
 		if(Robot.m_oi.operator.getRawButton(RobotMap.rBumper)) {
-			//Robot.m_Gripper.setHookAngle(200);
+			Robot.m_Gripper.setHookAngle(RobotMap.hookOpen);
 		} else {
-			//Robot.m_Gripper.setHookAngle(100);
+			Robot.m_Gripper.setHookAngle(RobotMap.hookClosed);
 		}
 		
 

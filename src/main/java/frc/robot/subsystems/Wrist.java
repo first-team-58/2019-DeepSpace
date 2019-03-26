@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
@@ -16,9 +17,11 @@ public class Wrist extends Subsystem {
 	private double pidOut = 0;
 	private double P, I, D;
 	public boolean positionAchieved = true;
+	public AnalogInput i_pot;
 
 	public Wrist() {
 		m_wristMotor = new WPI_TalonSRX(RobotMap.wristMotor);
+		i_pot = new AnalogInput(RobotMap.wristPotentiometer);
 	}
 
 	public void setSetpoint(double voltage) {
@@ -90,15 +93,17 @@ public class Wrist extends Subsystem {
 	}
 
 	public double getVoltage() {
-		return m_wristMotor.getSensorCollection().getAnalogInRaw() * .003222;
+		return i_pot.getVoltage();
+		//return m_wristMotor.getSensorCollection().getAnalogInRaw() * .003222;
 	}
 
-	public int getAngleRaw() {
-		return m_wristMotor.getSensorCollection().getAnalogInRaw();
-	}
+	//public int getAngleRaw() {
+		//return m_wristMotor.getSensorCollection().getAnalogInRaw();
+	//}
 
 	public double getAngleDegrees() {
-		return getVoltage() * 109.09; // conversion for wrist
+		//return getVoltage() * 109.09; // conversion for wrist
+		return getVoltage() * 72.0;
 	}
 
 	public double getSetpoint() {

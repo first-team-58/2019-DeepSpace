@@ -82,9 +82,12 @@ public class RobotMap {
   */
   public static double climberCalSpeed = -.5; //1 is full speed down, -1 is full speed up
   public static double maxDriveSpeed = .70;
-  
+  public static double hookOpen = 158;
+  public static double hookClosed = 9;
+
   //Sensors
   public static int shoulderPotentiometer = 0;
+  public static int wristPotentiometer = 1;
   
   //Angle limits
   public static double wristPositiveLimit = 340; //max angle for wrist
@@ -93,11 +96,11 @@ public class RobotMap {
   public static double shoulderNegitiveLimit = 230; //lowest angle for shoulder
   
   //PID values
-  public static double shoulderP = 2;//Was .5
-  public static double shoulderI = 1;//Was .05
+  public static double shoulderP = 1.5;//Was .5
+  public static double shoulderI = .05;//Was .05
   public static double shoulderD = 0;
-  public static double wristP = 1.5;//Was 4
-  public static double wristI = 0;//Was.1
+  public static double wristP = 4;//Was 4
+  public static double wristI = 0.1;//Was.1
   public static double wristD = 0;
   public static double elevatorP = 0.0003058;//0.0000775 
   /*
@@ -130,7 +133,7 @@ public class RobotMap {
   public static double shoulderPositionDeadzone = 7.5; //(math is absolute value, so abs(setpoint-pos) < this value)
   public static double wristPositionDeadzone = 7.5; //(math is absolute value, so abs(setpoint-pos) < this value)
   
-  //Positions
+  //Cargo Positions
   public static int rocketBallTopElevatorHeight = 14000; //top
   public static double rocketBallTopShoulderAngle = 74;
   public static double rocketBallTopWristAngle = 117; //was 88 should be 5, but thats too low for the pot
@@ -143,33 +146,37 @@ public class RobotMap {
   public static double rocketBallLowShoulderAngle = 137;
   public static double rocketBallLowWristAngle = 162;//was 123
 
-  public static int rocketHatchTopElevatorHeight = 14000;
+  //was 230 3/23/2019 was 255 (changed wrist to snow blower.  after that the angle for the human players station was too high)
+  //3/24: was 238, 
+  public static int ballFromFloorElevatorHeight = 3000;
+  public static double ballFromFloorShoulderAngle = 157;
+  public static double ballFromFloorWristAngle = 115;//was 73
+
+  //Hatch Positions
+  // 3/24: 14000, 80, 182
+  public static int rocketHatchTopElevatorHeight = 13600;
   public static double rocketHatchTopShoulderAngle = 80;
-  public static double rocketHatchTopWristAngle = 182;
+  public static double rocketHatchTopWristAngle = 180;
   
   //Update 3/23: Elevator setpoint was at 2500 before we changed the wrist to a snowblower
-  public static int rocketHatchMidElevatorHeight = 6500;
+  // 3/24: was 6500, 102, 204
+  public static int rocketHatchMidElevatorHeight = 4400;
   public static double rocketHatchMidShoulderAngle = 102;
   public static double rocketHatchMidWristAngle = 204; //was 173
   
   //Update 3/23: Elevator setpoint was at 1500 before we changed the wrist to a snowblower
-  public static int rocketHatchLowElevatorHeight = 5500;
+  // 3/24: 5500, 167, 238
+  public static int rocketHatchLowElevatorHeight = 2630;
   public static double rocketHatchLowShoulderAngle = 167;
-  //was 230 3/23/2019 was 255 (changed wrist to snow blower.  after that the angle for the human players station was too high)
   public static double rocketHatchLowWristAngle = 238;
-  public static int ballFromFloorElevatorHeight = 3000;
-  public static double ballFromFloorShoulderAngle = 157;
-  public static double ballFromFloorWristAngle = 115;//was 73
   
-  public static int hatchFromFloorElevatorHeight = 1500;
-  public static double hatchFromFloorShoulderAngle = 177;
-  public static double hatchFromFloorWristAngle = 154;
+  // 3/24: was 1500, 177, 154 
+  public static int hatchFromFloorElevatorHeight = 2630;
+  public static double hatchFromFloorShoulderAngle = 167;
+  public static double hatchFromFloorWristAngle = 238;
 
-  //public static double Hookopen = 0; 
-  //public static double Hookclose = 1;
-  //public static double angle;
-  
-  public static int climberTarget = 24000;//How high we climb?
+
+  public static int climberTarget = 23000;//How high we climb?
   
   public static long shoulderZero = 0;
   public static int wristZero = 0;

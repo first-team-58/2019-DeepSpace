@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 //import frc.robot.commands.ToggleHatch;
 import edu.wpi.first.wpilibj.Servo;
 //import edu.wpi.first.wpilibj.PWM;
+//import edu.wpi.first.wpilibj.PWM;
 /**
  * An example subsystem.  You can replace me with your own Subsystem.
  */
@@ -22,7 +23,16 @@ public class Gripper extends Subsystem {
     // constructor
     public Gripper () {
         m_GripperWheel = new WPI_VictorSPX(RobotMap.gripperMotor);
-        //Hook = new Servo(5);
+       // PWM t = new PWM(0);
+       // AnalogOutput t = new AnalogOutput(0);
+       // for(int i = 0; i < 10; i++) {
+         //   try {
+                Hook = new Servo(RobotMap.hookServo);
+           // } catch (Exception e) {
+             //   System.out.println(i + " reports that is is busy");
+            //}
+     //   }
+        
         //hatchReleaseSolenoid = new Solenoid(RobotMap.hatchSolenoid);
         //hatchReleaseSolenoid.set(false);
         
