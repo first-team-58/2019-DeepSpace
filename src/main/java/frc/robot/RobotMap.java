@@ -99,7 +99,7 @@ public class RobotMap {
   public static double shoulderP = 1.5;//Was .5
   public static double shoulderI = .05;//Was .05
   public static double shoulderD = 0;
-  public static double wristP = 4;//Was 4
+  public static double wristP = 3;//Was 4
   public static double wristI = 0.1;//Was.1
   public static double wristD = 0;
   public static double elevatorP = 0.0003058;//0.0000775 
@@ -168,7 +168,7 @@ public class RobotMap {
   // 3/24: 5500, 167, 238
   public static int rocketHatchLowElevatorHeight = 2630;
   public static double rocketHatchLowShoulderAngle = 167;
-  public static double rocketHatchLowWristAngle = 238;
+  public static double rocketHatchLowWristAngle = 272;
   
   // 3/24: was 1500, 177, 154 
   public static int hatchFromFloorElevatorHeight = 2630;

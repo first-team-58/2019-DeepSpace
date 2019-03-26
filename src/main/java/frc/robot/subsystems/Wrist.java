@@ -25,16 +25,16 @@ public class Wrist extends Subsystem {
 	}
 
 	public void setSetpoint(double voltage) {
-		if (voltage > 3.0) {
-			this.setpoint = 3.0;
-		} else {
+		//if (voltage > 3.0) {
+			//this.setpoint = 3.0;
+		//} else {
 			this.setpoint = voltage;
-		}
+		//}
 		// SmartDashboard.putNumber("Wrist setpoint", this.setpoint);
 	}
 
 	public void setSetpointAngle(double angle) {
-		setSetpoint(angle / 109.09);
+		setSetpoint(angle / 72.0);
 	}
 
 	public void setPID(double p, double i, double d) {
@@ -44,7 +44,8 @@ public class Wrist extends Subsystem {
 	}
 
 	public double getSetpointAngle() {
-		return setpoint * 109.09;
+		//return setpoint * 109.09;
+		return setpoint * 72.0;
 	}
 
 	public void PID() {
@@ -57,9 +58,9 @@ public class Wrist extends Subsystem {
 
 	public void drive(double value) {
 		double v2;
-		if (value > .5) {
+		if (value > .75) {
 			// m_wristMotor.set(.5);
-			v2 = .5;
+			v2 = .75;
 		} else if (value < -.5) {
 			// m_wristMotor.set(-.5);
 			v2 = -.5;
@@ -72,7 +73,7 @@ public class Wrist extends Subsystem {
 																			// turn ccw when angle > 300
 		} else if (v2 < 0 && getAngleDegrees() < RobotMap.wristNegitiveLimit) { // wrist rotating clockwise | will not
 																				// turn cw when angle < 50
-		} else if(Robot.pdp.getCurrent(11) > 3) {
+		//} else if(Robot.pdp.getCurrent(11) > 3) {
 			
 		} else {
 			m_wristMotor.set(v2);

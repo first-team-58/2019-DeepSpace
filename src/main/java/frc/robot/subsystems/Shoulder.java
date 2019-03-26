@@ -104,7 +104,7 @@ public double getSetpointAngle() {
 	public void drivePID() {
 		PID();
 		drive(pidOut);
-		SmartDashboard.putNumber("Shoulder pidOut", pidOut);
+		//SmartDashboard.putNumber("Shoulder pidOut", pidOut);
 	}
 
 	public double getSetpoint() {
